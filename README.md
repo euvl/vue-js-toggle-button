@@ -1,3 +1,9 @@
+### Vue.JS toggle / switch button - simple, pretty, customizable.
+
+![Imgur](http://i.imgur.com/a2Hf7pm.png)
+
+[Live demo here](http://vue-js-toggle-button.yev.io/)
+
 Install:
 ```bash
 npm install vue-js-toggle-button --save
