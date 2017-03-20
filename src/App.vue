@@ -18,7 +18,8 @@
           :color="item.color"
           :sync="true"
           :labels="true"
-          :key="i"/>
+          :key="i"
+          @change="updateItemValue(i)"/>
       </span>
     </div>
   </div>
@@ -41,11 +42,15 @@ export default {
   },
   mounted () {
     var i = 0;
-
     setInterval(() => {
-      this.items[i].value = !this.items[i].value
-      i = (i + 1) % this.items.length;
+      this.updateItemValue(i)
+      i = (i + 1) % this.items.length
     }, 600)
+  },
+  methods: {
+    updateItemValue(index) {
+      this.items[index].value = !this.items[index].value
+    }
   }
 }
 </script>
