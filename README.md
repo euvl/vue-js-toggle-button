@@ -1,18 +1,14 @@
-# vue-js-toggle-button
-
-> A toggle button component for Vue.js 2+
-
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
+Install:
+```bash
+npm install vue-js-toggle-button --save
 ```
-
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+Import:
+```javascript
+import ToggleButton from 'vue-js-toggle-button'
+Vue.use(ToggleButton)
+```
+Use: 
+```vue
+<toggle-button @change="..."/>
+<toggle-button :value="false" :color="#82C7EB" :sync="true" :labels="true""/>
+```
