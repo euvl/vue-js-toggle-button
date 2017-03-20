@@ -1,9 +1,9 @@
 {
   "name": "vue-js-toggle-button",
   "description": "A toggle button component for Vue.js 2+",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "euvl <yev.vlasenko@gmail.com>",
-  "private": true,
+  "private": false,
   "main": "src/ToggleButton/index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
