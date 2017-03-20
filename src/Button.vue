@@ -24,7 +24,7 @@ export default {
     },
     color: {
       type: String,
-      default: '#85BD86'
+      default: '#75C791'
     },
     labels: {
       type: Boolean,
