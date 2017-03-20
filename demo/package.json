@@ -6,9 +6,10 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
+    "vue": "^2.0.0",
+    "vue-js-toggle-button": "^1.0.3"
   },
   "devDependencies": {
-    "vue": "^2.2.1",
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",
     "babel-preset-latest": "^6.0.0",
