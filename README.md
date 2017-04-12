@@ -4,6 +4,8 @@
 
 ![Imgur](http://i.imgur.com/a2Hf7pm.png)
 
+Feel free to ask questions or propose features in the "Issues" section
+
 [Live demo here](http://vue-js-toggle-button.yev.io/)
 
 Install:
