@@ -30,7 +30,7 @@ export default {
       default: false
     },
     color: {
-      type: String,
+      type: [String, Object],
       default: '#75C791'
     },
     labels: {
@@ -137,7 +137,7 @@ export default {
     background: #bfcbd9;
     transition: border-color .3s, background-color .3s;
 
-
+    width: 50px;
     width: var(--toggle-width);
     height: 22px;
 
@@ -163,7 +163,8 @@ export default {
   &.toggled {
     .v-switch-core {
       &:before {
-        transform: translate( var(--toggle-transform-distance), 2px);
+        transform: translate(30px, 2px);
+        transform: translate(var(--toggle-transform-distance), 2px);
       }
     }
   }
