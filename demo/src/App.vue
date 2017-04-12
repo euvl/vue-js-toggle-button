@@ -2,25 +2,32 @@
   <div id="app">
     <h1></h1>
     <h2>What a nice toggle button!</h2>
-    <div style="padding: 10px;">
+    <div class="padding">
       <toggle-button @change="toggled = $event.value"/> Toggle me!
       <pre>State: {{toggled}}</pre>
     </div>
-    <h2>Can have labels</h2>
-    <div>
-      <toggle-button :value="true" color="#82C7EB" :labels="true"/> Toggle me!
+    <div class="padding">
+      <h2>Can have labels & custom width</h2>
+      <div>
+        <toggle-button :value="true" color="#82C7EB" :labels="true"/>
+        <toggle-button :value="true"
+          :labels="{checked: 'Android', unchecked: 'iPhone'}"
+          :width="80"/>
+      </div>
     </div>
-    <h2>And be programatically set/reset</h2>
-    <div>
-      <span v-for="(item, i) in items" style="padding: 5px">
-        <toggle-button
-          :value="item.value"
-          :color="item.color"
-          :sync="true"
-          :labels="true"
-          :key="i"
-          @change="updateItemValue(i)"/>
-      </span>
+    <div class="padding">
+      <h2>And be programatically set/reset</h2>
+      <div>
+        <span v-for="(item, i) in items" style="padding: 5px">
+          <toggle-button
+            :value="item.value"
+            :color="item.color"
+            :sync="true"
+            :labels="true"
+            :key="i"
+            @change="updateItemValue(i)"/>
+        </span>
+      </div>
     </div>
   </div>
 </template>
@@ -63,6 +70,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.padding {
+  padding: 10px;
 }
 
 h1, h2 {
