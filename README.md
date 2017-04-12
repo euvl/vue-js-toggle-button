@@ -1,4 +1,4 @@
-### Vue.JS toggle / switch button - simple, pretty, customizable.
+### Vue.js 2 toggle / switch button - simple, pretty, customizable.
 
 [![npm version](https://badge.fury.io/js/vue-js-toggle-button.svg)](https://badge.fury.io/js/vue-js-toggle-button)
 
