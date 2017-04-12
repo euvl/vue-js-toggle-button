@@ -9395,10 +9395,6 @@ var objectHas = function objectHas(object, title) {
       type: [Boolean, Object],
       default: false,
       validator: function validator(value) {
-        /*
-          If "labels" is an object, it should have at least one of
-          "checked" or "unchecked" attributes. The default will be empty string
-        */
         if ((typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object') {
           return value.checked || value.unchecked;
         }
