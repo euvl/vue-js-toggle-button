@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-import ToggleButton from 'vue-js-toggle-button'
+import ToggleButton from 'plugin'
 
 Vue.use(ToggleButton)
 
