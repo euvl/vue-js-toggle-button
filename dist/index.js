@@ -9344,6 +9344,15 @@ Vue$3.compile = compileToFunctions;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -9370,11 +9379,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     color: {
       type: String,
-      default: '#85BD86'
+      default: '#75C791'
     },
     labels: {
-      type: Boolean,
-      default: false
+      type: [Boolean, Object],
+      default: false,
+      validator: function validator(value) {
+        if (typeof value === 'boolean') {
+          return true;
+        }
+
+        if (value !== null && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object') {
+          return typeof value.checked === 'string' && typeof value.unchecked === 'string' && value.checked !== '' && value.unchecked !== '';
+        }
+
+        return false;
+      }
     },
     width: {
       type: Number,
@@ -9386,6 +9406,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       return {
         'background-color': this.color,
         'border-color': this.color
+      };
+    },
+    correspondingWidth: function correspondingWidth() {
+      return {
+        '--toggle-width': this.width + 'px',
+        '--toggle-transform-distance': this.width - 20 + 'px'
       };
     }
   },
@@ -9419,7 +9445,7 @@ exports = module.exports = __webpack_require__(4)();
 
 
 // module
-exports.push([module.i, ".vue-js-switch[data-v-25adc6c0]{display:inline-block;position:relative;overflow:hidden;vertical-align:middle;user-select:none;cursor:pointer;line-height:22px;height:22px}.vue-js-switch .v-switch-input[data-v-25adc6c0]{display:none}.vue-js-switch .v-switch-label[data-v-25adc6c0]{position:absolute;top:0;font-size:10px;font-weight:600;line-height:22px;height:22px;color:#fff}.vue-js-switch .v-switch-label.v-left[data-v-25adc6c0]{left:10px}.vue-js-switch .v-switch-label.v-right[data-v-25adc6c0]{right:10px}.vue-js-switch .v-switch-core[data-v-25adc6c0]{margin:0;display:inline-block;position:relative;border:1px solid #bfcbd9;outline:0;border-radius:12px;box-sizing:border-box;background:#bfcbd9;transition:border-color .3s,background-color .3s;width:46px;height:22px}.vue-js-switch .v-switch-core[data-v-25adc6c0]:before{display:block;content:\"\";overflow:hidden;transform:translate(2px,2px);top:0;left:0;position:absolute;border-radius:100%;transition:transform .3s;width:16px;height:16px;z-index:20;background-color:#fff}.vue-js-switch.toggled .v-switch-core[data-v-25adc6c0]:before{transform:translate(26px,2px)}", ""]);
+exports.push([module.i, ".vue-js-switch[data-v-25adc6c0]{display:inline-block;position:relative;overflow:hidden;vertical-align:middle;user-select:none;cursor:pointer;line-height:22px;height:22px}.vue-js-switch .v-switch-input[data-v-25adc6c0]{display:none}.vue-js-switch .v-switch-label[data-v-25adc6c0]{position:absolute;top:0;font-size:10px;font-weight:600;line-height:22px;height:22px;color:#fff}.vue-js-switch .v-switch-label.v-left[data-v-25adc6c0]{left:10px}.vue-js-switch .v-switch-label.v-right[data-v-25adc6c0]{right:10px}.vue-js-switch .v-switch-core[data-v-25adc6c0]{margin:0;display:inline-block;position:relative;border:1px solid #bfcbd9;outline:0;border-radius:12px;box-sizing:border-box;background:#bfcbd9;transition:border-color .3s,background-color .3s;width:var(--toggle-width);height:22px}.vue-js-switch .v-switch-core[data-v-25adc6c0]:before{display:block;content:\"\";overflow:hidden;transform:translate(2px,2px);top:0;left:0;position:absolute;border-radius:100%;transition:transform .3s;width:16px;height:16px;z-index:20;background-color:#fff}.vue-js-switch.toggled .v-switch-core[data-v-25adc6c0]:before{transform:translate(var(--toggle-transform-distance),2px)}", ""]);
 
 // exports
 
@@ -9543,7 +9569,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "vue-js-switch",
     class: {
       toggled: _vm.toggled
-    }
+    },
+    style: (_vm.correspondingWidth)
   }, [_c('input', {
     staticClass: "v-switch-input",
     attrs: {
@@ -9558,11 +9585,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }), _vm._v(" "), _c('span', {
     staticClass: "v-switch-core",
     style: (_vm.toggled && _vm.coreStyle)
-  }), _vm._v(" "), (_vm.labels) ? [(_vm.toggled) ? _c('span', {
+  }), _vm._v(" "), (_vm.labels) ? [(_vm.labels.checked && _vm.labels.unchecked) ? _c('div', [(_vm.toggled) ? _c('span', {
+    staticClass: "v-switch-label v-left"
+  }, [_vm._v(_vm._s(_vm.labels.checked))]) : _c('span', {
+    staticClass: "v-switch-label v-right"
+  }, [_vm._v(_vm._s(_vm.labels.unchecked))])]) : _c('div', [(_vm.toggled) ? _c('span', {
     staticClass: "v-switch-label v-left"
   }, [_vm._v("on")]) : _c('span', {
     staticClass: "v-switch-label v-right"
-  }, [_vm._v("off")])] : _vm._e()], 2)
+  }, [_vm._v("off")])])] : _vm._e()], 2)
 },staticRenderFns: []}
 
 /***/ }),

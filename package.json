@@ -1,7 +1,7 @@
 {
   "name": "vue-js-toggle-button",
   "description": "A toggle button component for Vue.js 2+",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "author": "euvl <yev.vlasenko@gmail.com>",
   "private": false,
   "scripts": {
