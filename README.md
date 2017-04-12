@@ -18,9 +18,10 @@ import ToggleButton from 'vue-js-toggle-button'
 Vue.use(ToggleButton)
 ```
 Use: 
-```vue
-<toggle-button @change="..."/>
-<toggle-button :value="false" :color="#82C7EB" :sync="true" :labels="true""/>
+```xml
+<toggle-button @change="onChangeEventHandler"/>
+<toggle-button :value="false" :color="#82C7EB" :sync="true" :labels="true"/>
+<toggle-button :value="true" :labels="{checked: 'Foo', uncheked: 'Bar'}"/>
 ```
 
 ### Properties
