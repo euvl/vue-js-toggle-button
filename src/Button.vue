@@ -121,6 +121,7 @@ export default {
   }
 }
 </script>
+
 <style lang="scss" scoped>
 .vue-js-switch {
   display: inline-block;
