@@ -22,3 +22,19 @@ Use:
 <toggle-button @change="..."/>
 <toggle-button :value="false" :color="#82C7EB" :sync="true" :labels="true""/>
 ```
+
+### Properties
+
+| Name      | Type              | Default     | Description                        |
+| ---       | ---               | ---         | ---                                |
+| value     | Boolean           | false       | Initial state of the toggle button |
+| sync      | Boolean           | false       | If set to `true`, will be watching changes in `value` property and overwrite the current state of the button whenever `value` prop. changes |
+| color     | String            | `#75C791`   | Color of the button when checked   |
+| labels    | [Boolean, Object] | false       | If `Boolean` - shows/hides default labels ("on" and "off") <br>If `Object` - sets custom labels for both states. <br>Format: `{checked: 'Foo', unchecked: 'Bar'}`   |
+| width     | Number            | 50          | Width of the button, default is 50 |
+
+### Events
+
+| Name   | Description              |
+| ---    | ---                      |
+| change | Triggered whenever state of the component changes. <br>Contains: <br>`value` - state of the object <br>`srcEvent` - source click event |
