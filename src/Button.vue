@@ -1,7 +1,7 @@
 <template>
-<label class="vue-js-switch" :class="{toggled}" :style="correspondingWidth">
-  <input type="checkbox" class="v-switch-input" @change.stop="toggle">
-  <span class="v-switch-core" :style="toggled && coreStyle"></span>
+  <label class="vue-js-switch" :class="{toggled}" :style="correspondingWidth">
+    <input type="checkbox" class="v-switch-input" @change.stop="toggle">
+    <span class="v-switch-core" :style="toggled && coreStyle"></span>
     <template v-if="labels">
       <div v-if="labels.checked && labels.unchecked">
         <span class="v-switch-label v-left" v-if="toggled">{{labels.checked}}</span>
@@ -13,8 +13,7 @@
         <span class="v-switch-label v-right" v-else>off</span>
       </div>
     </template>
-  </span>
-</label>
+  </label>
 </template>
 
 <script>
