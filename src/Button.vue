@@ -1,22 +1,27 @@
 <template>
-  <label class="vue-js-switch" :class="{toggled}" :style="correspondingWidth">
-    <input type="checkbox" class="v-switch-input" @change.stop="toggle">
-    <span class="v-switch-core" :style="toggled && coreStyle"></span>
-    <template v-if="labels">
-      <div v-if="labels.checked && labels.unchecked">
-        <span class="v-switch-label v-left" v-if="toggled">{{labels.checked}}</span>
-        <span class="v-switch-label v-right" v-else>{{labels.unchecked}}</span>
-      </div>
-
-      <div v-else>
-        <span class="v-switch-label v-left" v-if="toggled">on</span>
-        <span class="v-switch-label v-right" v-else>off</span>
-      </div>
-    </template>
-  </label>
+<label class="vue-js-switch" :class="{toggled}">
+  <input type="checkbox" class="v-switch-input" @change.stop="toggle">
+  <span class="v-switch-core" :style="coreStyle"></span>
+  <div v-if="labels">
+    <span class="v-switch-label v-left" v-if="toggled">{{labelChecked}}</span>
+    <span class="v-switch-label v-right" v-else>{{labelUnchecked}}</span>
+  </div>
+</label>
 </template>
 
 <script>
+const DEF_CHECKED_COLOR = '#75C791'
+const DEF_UNCHEKED_COLOR = '#bfcbd9'
+
+const DEF_CHECKED_LABEL = 'on'
+const DEF_UNCHECKED_LABEL = 'off'
+
+const CORE_SIZE = 20
+
+const objectHas = (object, title) => {
+  return typeof object === 'object' && object.hasOwnProperty(title)
+}
+
 export default {
   name: 'ToggleButton',
   props: {
@@ -29,25 +34,24 @@ export default {
       default: false
     },
     color: {
-      type: String,
-      default: '#75C791'
+      type: [String, Object],
+      validator (value) {
+        if (typeof value === 'object') {
+          return value.checked || value.unchecked
+        }
+
+        return typeof value === 'string'
+      }
     },
     labels: {
       type: [Boolean, Object],
       default: false,
       validator (value) {
-        if (typeof value === 'boolean') {
-          return true
+        if (typeof value === 'object') {
+          return value.checked || value.unchecked
         }
 
-        if (value !== null && typeof value === 'object') {
-          return typeof value.checked === 'string' &&
-            typeof value.unchecked === 'string' &&
-            value.checked !== '' &&
-            value.unchecked !== ''
-        }
-
-        return false
+        return typeof value === 'boolean'
       }
     },
     width: {
@@ -56,17 +60,44 @@ export default {
     }
   },
   computed: {
-    coreStyle () {
-      return {
-        'background-color': this.color,
-        'border-color': this.color
+    colorChecked () {
+      if (typeof this.color !== 'object') {
+        return this.color || DEF_CHECKED_COLOR
       }
+
+      return objectHas(this.color, 'checked')
+        ? this.color.checked
+        : DEF_CHECKED_COLOR
     },
 
-    correspondingWidth () {
+    colorUnchecked () {
+      return objectHas(this.color, 'unchecked')
+        ? this.color.unchecked
+        : DEF_UNCHEKED_COLOR
+    },
+
+    colorCurrent () {
+      return this.toggled ? this.colorChecked : this.colorUnchecked
+    },
+
+    labelChecked () {
+      return objectHas(this.labels, 'checked')
+        ? this.labels.checked
+        : DEF_CHECKED_LABEL
+    },
+
+    labelUnchecked () {
+      return objectHas(this.labels, 'unchecked')
+        ? this.labels.unchecked
+        : DEF_UNCHECKED_LABEL
+    },
+
+    coreStyle () {
       return {
+        'background-color': this.colorCurrent,
+        'border-color': this.colorCurrent,
         '--toggle-width': this.width + 'px',
-        '--toggle-transform-distance': (this.width - 20) + 'px'
+        '--toggle-transform-distance': (this.width - CORE_SIZE) + 'px'
       }
     }
   },
@@ -90,6 +121,7 @@ export default {
   }
 }
 </script>
+
 <style lang="scss" scoped>
 .vue-js-switch {
   display: inline-block;
@@ -136,7 +168,7 @@ export default {
     background: #bfcbd9;
     transition: border-color .3s, background-color .3s;
 
-
+    width: 50px;
     width: var(--toggle-width);
     height: 22px;
 
@@ -162,7 +194,8 @@ export default {
   &.toggled {
     .v-switch-core {
       &:before {
-        transform: translate( var(--toggle-transform-distance), 2px);
+        transform: translate(30px, 2px);
+        transform: translate(var(--toggle-transform-distance), 2px);
       }
     }
   }

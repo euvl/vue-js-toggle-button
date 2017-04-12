@@ -7,12 +7,27 @@
       <pre>State: {{toggled}}</pre>
     </div>
     <div class="padding">
-      <h2>Can have labels & custom width</h2>
+      <h2>Can have custom labels, colors and width</h2>
       <div>
-        <toggle-button :value="true" color="#82C7EB" :labels="true"/>
+        <toggle-button :labels="true" color="#82C7EB"/>
+
         <toggle-button :value="true"
           :labels="{checked: 'Android', unchecked: 'iPhone'}"
+          :color="{checked: '#7DCE94', unchecked: '#82C7EB'}"
           :width="80"/>
+
+        <toggle-button
+          :width="120"
+          :value="true"
+          color="#BB99CD"
+          :labels="{checked: 'Only left label!', unchecked: ''}"/>
+
+        <toggle-button
+          :value="false"
+          :width="120"
+          color="#BB99CD"
+          :labels="{checked: '', unchecked: 'Only right label!'}"
+          />
       </div>
     </div>
     <div class="padding">

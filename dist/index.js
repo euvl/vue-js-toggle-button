@@ -9357,14 +9357,18 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
+
+var DEF_CHECKED_COLOR = '#75C791';
+var DEF_UNCHEKED_COLOR = '#bfcbd9';
+
+var DEF_CHECKED_LABEL = 'on';
+var DEF_UNCHECKED_LABEL = 'off';
+
+var CORE_SIZE = 20;
+
+var objectHas = function objectHas(object, title) {
+  return (typeof object === 'undefined' ? 'undefined' : _typeof(object)) === 'object' && object.hasOwnProperty(title);
+};
 
 /* harmony default export */ __webpack_exports__["default"] = {
   name: 'ToggleButton',
@@ -9378,22 +9382,24 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       default: false
     },
     color: {
-      type: String,
-      default: '#75C791'
+      type: [String, Object],
+      validator: function validator(value) {
+        if ((typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object') {
+          return value.checked || value.unchecked;
+        }
+
+        return typeof value === 'string';
+      }
     },
     labels: {
       type: [Boolean, Object],
       default: false,
       validator: function validator(value) {
-        if (typeof value === 'boolean') {
-          return true;
+        if ((typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object') {
+          return value.checked || value.unchecked;
         }
 
-        if (value !== null && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object') {
-          return typeof value.checked === 'string' && typeof value.unchecked === 'string' && value.checked !== '' && value.unchecked !== '';
-        }
-
-        return false;
+        return typeof value === 'boolean';
       }
     },
     width: {
@@ -9402,16 +9408,31 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     }
   },
   computed: {
+    colorChecked: function colorChecked() {
+      if (_typeof(this.color) !== 'object') {
+        return this.color || DEF_CHECKED_COLOR;
+      }
+
+      return objectHas(this.color, 'checked') ? this.color.checked : DEF_CHECKED_COLOR;
+    },
+    colorUnchecked: function colorUnchecked() {
+      return objectHas(this.color, 'unchecked') ? this.color.unchecked : DEF_UNCHEKED_COLOR;
+    },
+    colorCurrent: function colorCurrent() {
+      return this.toggled ? this.colorChecked : this.colorUnchecked;
+    },
+    labelChecked: function labelChecked() {
+      return objectHas(this.labels, 'checked') ? this.labels.checked : DEF_CHECKED_LABEL;
+    },
+    labelUnchecked: function labelUnchecked() {
+      return objectHas(this.labels, 'unchecked') ? this.labels.unchecked : DEF_UNCHECKED_LABEL;
+    },
     coreStyle: function coreStyle() {
       return {
-        'background-color': this.color,
-        'border-color': this.color
-      };
-    },
-    correspondingWidth: function correspondingWidth() {
-      return {
+        'background-color': this.colorCurrent,
+        'border-color': this.colorCurrent,
         '--toggle-width': this.width + 'px',
-        '--toggle-transform-distance': this.width - 20 + 'px'
+        '--toggle-transform-distance': this.width - CORE_SIZE + 'px'
       };
     }
   },
@@ -9445,7 +9466,7 @@ exports = module.exports = __webpack_require__(4)();
 
 
 // module
-exports.push([module.i, ".vue-js-switch[data-v-25adc6c0]{display:inline-block;position:relative;overflow:hidden;vertical-align:middle;user-select:none;cursor:pointer;line-height:22px;height:22px}.vue-js-switch .v-switch-input[data-v-25adc6c0]{display:none}.vue-js-switch .v-switch-label[data-v-25adc6c0]{position:absolute;top:0;font-size:10px;font-weight:600;line-height:22px;height:22px;color:#fff}.vue-js-switch .v-switch-label.v-left[data-v-25adc6c0]{left:10px}.vue-js-switch .v-switch-label.v-right[data-v-25adc6c0]{right:10px}.vue-js-switch .v-switch-core[data-v-25adc6c0]{margin:0;display:inline-block;position:relative;border:1px solid #bfcbd9;outline:0;border-radius:12px;box-sizing:border-box;background:#bfcbd9;transition:border-color .3s,background-color .3s;width:var(--toggle-width);height:22px}.vue-js-switch .v-switch-core[data-v-25adc6c0]:before{display:block;content:\"\";overflow:hidden;transform:translate(2px,2px);top:0;left:0;position:absolute;border-radius:100%;transition:transform .3s;width:16px;height:16px;z-index:20;background-color:#fff}.vue-js-switch.toggled .v-switch-core[data-v-25adc6c0]:before{transform:translate(var(--toggle-transform-distance),2px)}", ""]);
+exports.push([module.i, ".vue-js-switch[data-v-25adc6c0]{display:inline-block;position:relative;overflow:hidden;vertical-align:middle;user-select:none;cursor:pointer;line-height:22px;height:22px}.vue-js-switch .v-switch-input[data-v-25adc6c0]{display:none}.vue-js-switch .v-switch-label[data-v-25adc6c0]{position:absolute;top:0;font-size:10px;font-weight:600;line-height:22px;height:22px;color:#fff}.vue-js-switch .v-switch-label.v-left[data-v-25adc6c0]{left:10px}.vue-js-switch .v-switch-label.v-right[data-v-25adc6c0]{right:10px}.vue-js-switch .v-switch-core[data-v-25adc6c0]{margin:0;display:inline-block;position:relative;border:1px solid #bfcbd9;outline:0;border-radius:12px;box-sizing:border-box;background:#bfcbd9;transition:border-color .3s,background-color .3s;width:50px;width:var(--toggle-width);height:22px}.vue-js-switch .v-switch-core[data-v-25adc6c0]:before{display:block;content:\"\";overflow:hidden;transform:translate(2px,2px);top:0;left:0;position:absolute;border-radius:100%;transition:transform .3s;width:16px;height:16px;z-index:20;background-color:#fff}.vue-js-switch.toggled .v-switch-core[data-v-25adc6c0]:before{transform:translate(30px,2px);transform:translate(var(--toggle-transform-distance),2px)}", ""]);
 
 // exports
 
@@ -9569,8 +9590,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "vue-js-switch",
     class: {
       toggled: _vm.toggled
-    },
-    style: (_vm.correspondingWidth)
+    }
   }, [_c('input', {
     staticClass: "v-switch-input",
     attrs: {
@@ -9584,16 +9604,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), _c('span', {
     staticClass: "v-switch-core",
-    style: (_vm.toggled && _vm.coreStyle)
-  }), _vm._v(" "), (_vm.labels) ? [(_vm.labels.checked && _vm.labels.unchecked) ? _c('div', [(_vm.toggled) ? _c('span', {
+    style: (_vm.coreStyle)
+  }), _vm._v(" "), (_vm.labels) ? _c('div', [(_vm.toggled) ? _c('span', {
     staticClass: "v-switch-label v-left"
-  }, [_vm._v(_vm._s(_vm.labels.checked))]) : _c('span', {
+  }, [_vm._v(_vm._s(_vm.labelChecked))]) : _c('span', {
     staticClass: "v-switch-label v-right"
-  }, [_vm._v(_vm._s(_vm.labels.unchecked))])]) : _c('div', [(_vm.toggled) ? _c('span', {
-    staticClass: "v-switch-label v-left"
-  }, [_vm._v("on")]) : _c('span', {
-    staticClass: "v-switch-label v-right"
-  }, [_vm._v("off")])])] : _vm._e()], 2)
+  }, [_vm._v(_vm._s(_vm.labelUnchecked))])]) : _vm._e()])
 },staticRenderFns: []}
 
 /***/ }),
