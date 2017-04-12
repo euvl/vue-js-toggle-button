@@ -1,10 +1,19 @@
 <template>
-<label class="vue-js-switch" :class="{toggled}">
+<label class="vue-js-switch" :class="{toggled}" :style="correspondingWidth">
   <input type="checkbox" class="v-switch-input" @change.stop="toggle">
   <span class="v-switch-core" :style="toggled && coreStyle"></span>
     <template v-if="labels">
-      <span class="v-switch-label v-left" v-if="toggled">on</span>
-      <span class="v-switch-label v-right" v-else>off</span>
+
+      <div v-if="labels.checked && labels.unchecked">
+        <span class="v-switch-label v-left" v-if="toggled">{{labels.checked}}</span>
+        <span class="v-switch-label v-right" v-else>{{labels.unchecked}}</span>
+      </div>
+
+      <div v-else>
+        <span class="v-switch-label v-left" v-if="toggled">on</span>
+        <span class="v-switch-label v-right" v-else>off</span>
+      </div>
+      
     </template>
   </span>
 </label>
@@ -27,8 +36,20 @@ export default {
       default: '#75C791'
     },
     labels: {
-      type: Boolean,
-      default: false
+      type: [Boolean, Object],
+      default: false,
+      validator(value) {
+
+        if(typeof value === 'boolean')
+          return true;
+        else if(value !== null && typeof value === 'object')
+          return typeof value.checked === 'string' &&
+            typeof value.unchecked === 'string' &&
+            value.checked !== '' &&
+            value.unchecked !== '';
+
+        return false;
+      }
     },
     width: {
       type: Number,
@@ -41,7 +62,15 @@ export default {
         'background-color': this.color,
         'border-color': this.color
       }
+    },
+
+    correspondingWidth () {
+      return {
+        '--toggle-width': this.width + 'px',
+        '--toggle-transform-distance': (this.width - 20) + 'px'
+      }
     }
+
   },
   watch: {
     value (value) {
@@ -107,9 +136,10 @@ export default {
     border-radius: 12px;
     box-sizing: border-box;
     background: #bfcbd9;
-    transition: border-color .3s,background-color .3s;
+    transition: border-color .3s, background-color .3s;
 
-    width: 46px;
+
+    width: var(--toggle-width);
     height: 22px;
 
     &:before {
@@ -134,7 +164,7 @@ export default {
   &.toggled {
     .v-switch-core {
       &:before {
-        transform: translate(26px, 2px);
+        transform: translate( var(--toggle-transform-distance), 2px);
       }
     }
   }
