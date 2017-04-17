@@ -28,6 +28,13 @@
           color="#BB99CD"
           :labels="{checked: '', unchecked: 'Only right label!'}"
           />
+
+        <toggle-button
+          :value="false"
+          :width="110"
+          :color="{unchecked: '#FF6699'}"
+          :labels="{unchecked: 'Disabled button'}"
+          :disabled="true"/>
       </div>
     </div>
     <div class="padding">

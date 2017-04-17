@@ -9377,6 +9377,10 @@ var objectHas = function objectHas(object, title) {
       type: Boolean,
       default: false
     },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
     sync: {
       type: Boolean,
       default: false
@@ -9466,7 +9470,7 @@ exports = module.exports = __webpack_require__(4)();
 
 
 // module
-exports.push([module.i, ".vue-js-switch[data-v-25adc6c0]{display:inline-block;position:relative;overflow:hidden;vertical-align:middle;user-select:none;cursor:pointer;line-height:22px;height:22px}.vue-js-switch .v-switch-input[data-v-25adc6c0]{display:none}.vue-js-switch .v-switch-label[data-v-25adc6c0]{position:absolute;top:0;font-size:10px;font-weight:600;line-height:22px;height:22px;color:#fff}.vue-js-switch .v-switch-label.v-left[data-v-25adc6c0]{left:10px}.vue-js-switch .v-switch-label.v-right[data-v-25adc6c0]{right:10px}.vue-js-switch .v-switch-core[data-v-25adc6c0]{margin:0;display:inline-block;position:relative;border:1px solid #bfcbd9;outline:0;border-radius:12px;box-sizing:border-box;background:#bfcbd9;transition:border-color .3s,background-color .3s;width:50px;width:var(--toggle-width);height:22px}.vue-js-switch .v-switch-core[data-v-25adc6c0]:before{display:block;content:\"\";overflow:hidden;transform:translate(2px,2px);top:0;left:0;position:absolute;border-radius:100%;transition:transform .3s;width:16px;height:16px;z-index:20;background-color:#fff}.vue-js-switch.toggled .v-switch-core[data-v-25adc6c0]:before{transform:translate(30px,2px);transform:translate(var(--toggle-transform-distance),2px)}", ""]);
+exports.push([module.i, ".vue-js-switch[data-v-25adc6c0]{display:inline-block;position:relative;overflow:hidden;vertical-align:middle;user-select:none;cursor:pointer;line-height:22px;height:22px}.vue-js-switch .v-switch-input[data-v-25adc6c0]{display:none}.vue-js-switch .v-switch-label[data-v-25adc6c0]{position:absolute;top:0;font-size:10px;font-weight:600;line-height:22px;height:22px;color:#fff}.vue-js-switch .v-switch-label.v-left[data-v-25adc6c0]{left:10px}.vue-js-switch .v-switch-label.v-right[data-v-25adc6c0]{right:10px}.vue-js-switch .v-switch-core[data-v-25adc6c0]{margin:0;display:inline-block;position:relative;border:1px solid #bfcbd9;outline:0;border-radius:12px;box-sizing:border-box;background:#bfcbd9;transition:border-color .3s,background-color .3s;width:50px;width:var(--toggle-width);height:22px}.vue-js-switch .v-switch-core[data-v-25adc6c0]:before{display:block;content:\"\";overflow:hidden;transform:translate(2px,2px);top:0;left:0;position:absolute;border-radius:100%;transition:transform .3s;width:16px;height:16px;z-index:20;background-color:#fff}.vue-js-switch.toggled .v-switch-core[data-v-25adc6c0]:before{transform:translate(30px,2px);transform:translate(var(--toggle-transform-distance),2px)}.vue-js-switch.disabled[data-v-25adc6c0]{pointer-events:none;cursor:not-allowed;opacity:.6}", ""]);
 
 // exports
 
@@ -9589,7 +9593,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('label', {
     staticClass: "vue-js-switch",
     class: {
-      toggled: _vm.toggled
+      toggled: _vm.toggled, disabled: _vm.disabled
     }
   }, [_c('input', {
     staticClass: "v-switch-input",

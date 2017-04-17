@@ -1,5 +1,5 @@
 <template>
-<label class="vue-js-switch" :class="{toggled}">
+<label class="vue-js-switch" :class="{toggled, disabled}">
   <input type="checkbox" class="v-switch-input" @change.stop="toggle">
   <span class="v-switch-core" :style="coreStyle"></span>
   <div v-if="labels">
@@ -26,6 +26,10 @@ export default {
   name: 'ToggleButton',
   props: {
     value: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
       type: Boolean,
       default: false
     },
@@ -198,6 +202,12 @@ export default {
         transform: translate(var(--toggle-transform-distance), 2px);
       }
     }
+  }
+
+  &.disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.6;
   }
 }
 </style>
