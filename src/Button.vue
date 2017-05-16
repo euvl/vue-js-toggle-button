@@ -178,6 +178,7 @@ export default {
     box-sizing: border-box;
     background: #bfcbd9;
     transition: border-color .3s, background-color .3s;
+    user-select: none;
 
     width: 50px;
     width: var(--toggle-width);
