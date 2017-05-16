@@ -1,22 +1,21 @@
 {
   "name": "vue-js-toggle-button",
   "description": "A toggle button component for Vue.js 2+",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "author": "euvl <yev.vlasenko@gmail.com>",
   "private": false,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "main": "dist/index.js",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/euvl/vue-js-toggle-button.git"
+    "type": "git",
+    "url": "https://github.com/euvl/vue-js-toggle-button.git"
   },
   "bugs": {
-    "url" : "https://github.com/euvl/vue-js-toggle-button/issues"
+    "url": "https://github.com/euvl/vue-js-toggle-button/issues"
   },
-  "dependencies": {
+  "peerDependencies": {
     "vue": "^2.0.0"
   },
   "keywords": [
@@ -34,8 +33,9 @@
     "file-loader": "^0.9.0",
     "node-sass": "^4.5.0",
     "sass-loader": "^5.0.1",
+    "vue": "^2.0.0",
     "vue-loader": "^11.1.4",
-    "vue-template-compiler": "^2.2.1",
+    "vue-template-compiler": "^2.0.0",
     "webpack": "^2.2.0",
     "webpack-dev-server": "^2.2.0"
   }

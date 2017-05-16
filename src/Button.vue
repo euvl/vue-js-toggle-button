@@ -17,6 +17,9 @@ const DEF_CHECKED_LABEL = 'on'
 const DEF_UNCHECKED_LABEL = 'off'
 
 const CORE_SIZE = 20
+// 11/25 = -.44
+const DEFAULT_HEIGHT = 22
+const DEFAULT_WIDTH = 50
 
 const objectHas = (object, title) => {
   return typeof object === 'object' && object.hasOwnProperty(title)
@@ -36,6 +39,10 @@ export default {
     sync: {
       type: Boolean,
       default: false
+    },
+    scale: {
+      type: Number,
+      default: 1
     },
     color: {
       type: [String, Object],
