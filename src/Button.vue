@@ -84,9 +84,9 @@ export default {
       let distance = width - height + margin
 
       return {
-        '--height': height + 'px',
-        '--width': width + 'px',
-        '--transform-distance': distance + 'px'
+        '--h': height + 'px',
+        '--w': width + 'px',
+        '--d': distance + 'px'
       }
     },
 
@@ -230,7 +230,7 @@ $margin: 3px;
   &.toggled {
     .v-switch-core:before {
       transform: translate(30px, $margin);
-      transform: translate(var(--transform-distance), $margin);
+      transform: translate(var(--d), $margin);
     }
   }
 
@@ -242,23 +242,23 @@ $margin: 3px;
 }
 
 .vue-js-switch {
-  line-height: var(--height);
-  height: var(--height);
+  line-height: var(--h);
+  height: var(--h);
 
   .v-switch-label {
-    line-height: var(--height);
-    height: var(--height);
+    line-height: var(--h);
+    height: var(--h);
   }
 
   .v-switch-core {
     border-radius: 999px;
     width: 50px;
-    width: var(--width);
-    height: var(--height);
+    width: var(--w);
+    height: var(--h);
 
     &:before {
-      width: calc(var(--height) - 6px);
-      height: calc(var(--height) - 6px);
+      width: calc(var(--h) - 6px);
+      height: calc(var(--h) - 6px);
     }
   }
 }

@@ -24,7 +24,7 @@
 
         <toggle-button
           :value="false"
-          :width="320"
+          :width="120"
           color="#BB99CD"
           :labels="{checked: '', unchecked: 'Only right label!'}"/>
 
