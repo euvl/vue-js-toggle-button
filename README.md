@@ -40,3 +40,14 @@ Use:
 | Name   | Description              |
 | ---    | ---                      |
 | change | Triggered whenever state of the component changes. <br>Contains: <br>`value` - state of the object <br>`srcEvent` - source click event |
+
+### Font size
+To change font size please use css:
+```css
+.vue-js-switch#changed-font {
+  font-size: 16px;
+}
+```
+```vue
+<toggle-button id="changed-font/>
+```
