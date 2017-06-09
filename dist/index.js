@@ -123,6 +123,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+//
+//
+//
 
 var DEF_CHECKED_COLOR = '#75C791';
 var DEF_UNCHEKED_COLOR = '#bfcbd9';
@@ -130,12 +133,12 @@ var DEF_UNCHEKED_COLOR = '#bfcbd9';
 var DEF_CHECKED_LABEL = 'on';
 var DEF_UNCHECKED_LABEL = 'off';
 
-var CORE_SIZE = 20;
+var margin = 3;
 // 11/25 = -.44
-var DEFAULT_HEIGHT = 22;
-var DEFAULT_WIDTH = 50;
+// const DEFAULT_HEIGHT = 22
+// const DEFAULT_WIDTH = 50
 
-var objectHas = function objectHas(object, title) {
+var contains = function contains(object, title) {
   return (typeof object === 'undefined' ? 'undefined' : _typeof(object)) === 'object' && object.hasOwnProperty(title);
 };
 
@@ -154,30 +157,22 @@ var objectHas = function objectHas(object, title) {
       type: Boolean,
       default: false
     },
-    scale: {
-      type: Number,
-      default: 1
-    },
     color: {
       type: [String, Object],
       validator: function validator(value) {
-        if ((typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object') {
-          return value.checked || value.unchecked;
-        }
-
-        return typeof value === 'string';
+        return (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' ? value.checked || value.unchecked : typeof value === 'string';
       }
     },
     labels: {
       type: [Boolean, Object],
       default: false,
       validator: function validator(value) {
-        if ((typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object') {
-          return value.checked || value.unchecked;
-        }
-
-        return typeof value === 'boolean';
+        return (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' ? value.checked || value.unchecked : typeof value === 'boolean';
       }
+    },
+    height: {
+      type: Number,
+      default: 22
     },
     width: {
       type: Number,
@@ -185,31 +180,47 @@ var objectHas = function objectHas(object, title) {
     }
   },
   computed: {
+    className: function className() {
+      var toggled = this.toggled,
+          disabled = this.disabled;
+
+
+      return ['vue-js-switch', { toggled: toggled, disabled: disabled }];
+    },
+    style: function style() {
+      var width = this.width,
+          height = this.height;
+
+      var distance = width - height + margin;
+
+      return {
+        '--height': height + 'px',
+        '--width': width + 'px',
+        '--transform-distance': distance + 'px'
+      };
+    },
     colorChecked: function colorChecked() {
       if (_typeof(this.color) !== 'object') {
         return this.color || DEF_CHECKED_COLOR;
       }
 
-      return objectHas(this.color, 'checked') ? this.color.checked : DEF_CHECKED_COLOR;
+      return contains(this.color, 'checked') ? this.color.checked : DEF_CHECKED_COLOR;
     },
     colorUnchecked: function colorUnchecked() {
-      return objectHas(this.color, 'unchecked') ? this.color.unchecked : DEF_UNCHEKED_COLOR;
+      return contains(this.color, 'unchecked') ? this.color.unchecked : DEF_UNCHEKED_COLOR;
     },
     colorCurrent: function colorCurrent() {
       return this.toggled ? this.colorChecked : this.colorUnchecked;
     },
     labelChecked: function labelChecked() {
-      return objectHas(this.labels, 'checked') ? this.labels.checked : DEF_CHECKED_LABEL;
+      return contains(this.labels, 'checked') ? this.labels.checked : DEF_CHECKED_LABEL;
     },
     labelUnchecked: function labelUnchecked() {
-      return objectHas(this.labels, 'unchecked') ? this.labels.unchecked : DEF_UNCHECKED_LABEL;
+      return contains(this.labels, 'unchecked') ? this.labels.unchecked : DEF_UNCHECKED_LABEL;
     },
     coreStyle: function coreStyle() {
       return {
-        'background-color': this.colorCurrent,
-        'border-color': this.colorCurrent,
-        '--toggle-width': this.width + 'px',
-        '--toggle-transform-distance': this.width - CORE_SIZE + 'px'
+        'background-color': this.colorCurrent
       };
     }
   },
@@ -264,7 +275,7 @@ exports = module.exports = __webpack_require__(5)();
 
 
 // module
-exports.push([module.i, ".vue-js-switch[data-v-25adc6c0]{display:inline-block;position:relative;overflow:hidden;vertical-align:middle;user-select:none;cursor:pointer;line-height:22px;height:22px}.vue-js-switch .v-switch-input[data-v-25adc6c0]{display:none}.vue-js-switch .v-switch-label[data-v-25adc6c0]{position:absolute;top:0;font-size:10px;font-weight:600;line-height:22px;height:22px;color:#fff}.vue-js-switch .v-switch-label.v-left[data-v-25adc6c0]{left:10px}.vue-js-switch .v-switch-label.v-right[data-v-25adc6c0]{right:10px}.vue-js-switch .v-switch-core[data-v-25adc6c0]{margin:0;display:inline-block;position:relative;border:1px solid #bfcbd9;outline:0;border-radius:12px;box-sizing:border-box;background:#bfcbd9;transition:border-color .3s,background-color .3s;user-select:none;width:50px;width:var(--toggle-width);height:22px}.vue-js-switch .v-switch-core[data-v-25adc6c0]:before{display:block;content:\"\";overflow:hidden;transform:translate(2px,2px);top:0;left:0;position:absolute;border-radius:100%;transition:transform .3s;width:16px;height:16px;z-index:20;background-color:#fff}.vue-js-switch.toggled .v-switch-core[data-v-25adc6c0]:before{transform:translate(30px,2px);transform:translate(var(--toggle-transform-distance),2px)}.vue-js-switch.disabled[data-v-25adc6c0]{pointer-events:none;cursor:not-allowed;opacity:.6}", ""]);
+exports.push([module.i, ".vue-js-switch[data-v-25adc6c0]{display:inline-block;position:relative;overflow:hidden;vertical-align:middle;user-select:none;font-size:10px;cursor:pointer}.vue-js-switch .v-switch-input[data-v-25adc6c0]{display:none}.vue-js-switch .v-switch-label[data-v-25adc6c0]{position:absolute;top:0;font-weight:600;color:#fff}.vue-js-switch .v-switch-label.v-left[data-v-25adc6c0]{left:10px}.vue-js-switch .v-switch-label.v-right[data-v-25adc6c0]{right:10px}.vue-js-switch .v-switch-core[data-v-25adc6c0]{margin:0;display:inline-block;position:relative;outline:0;box-sizing:border-box;background:#bfcbd9;transition:border-color .3s,background-color .3s;user-select:none}.vue-js-switch .v-switch-core[data-v-25adc6c0]:before{display:block;position:absolute;overflow:hidden;top:0;left:0;z-index:20;transform:translate(3px,3px);transition:transform .3s;border-radius:100%;background-color:#fff;content:\"\"}.vue-js-switch.toggled .v-switch-core[data-v-25adc6c0]:before{transform:translate(30px,3px);transform:translate(var(--transform-distance),3px)}.vue-js-switch.disabled[data-v-25adc6c0]{pointer-events:none;cursor:not-allowed;opacity:.6}.vue-js-switch .v-switch-label[data-v-25adc6c0],.vue-js-switch[data-v-25adc6c0]{line-height:var(--height);height:var(--height)}.vue-js-switch .v-switch-core[data-v-25adc6c0]{border-radius:999px;width:50px;width:var(--width);height:var(--height)}.vue-js-switch .v-switch-core[data-v-25adc6c0]:before{width:calc(var(--height) - 6px);height:calc(var(--height) - 6px)}", ""]);
 
 // exports
 
@@ -388,10 +399,8 @@ module.exports = function normalizeComponent (
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('label', {
-    staticClass: "vue-js-switch",
-    class: {
-      toggled: _vm.toggled, disabled: _vm.disabled
-    }
+    class: _vm.className,
+    style: (_vm.style)
   }, [_c('input', {
     staticClass: "v-switch-input",
     attrs: {

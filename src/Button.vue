@@ -1,6 +1,9 @@
 <template>
-<label class="vue-js-switch" :class="{toggled, disabled}">
-  <input type="checkbox" class="v-switch-input" @change.stop="toggle">
+<label :class="className"
+       :style="style">
+  <input type="checkbox"
+         class="v-switch-input"
+         @change.stop="toggle">
   <span class="v-switch-core" :style="coreStyle"></span>
   <div v-if="labels">
     <span class="v-switch-label v-left" v-if="toggled">{{labelChecked}}</span>
@@ -16,12 +19,12 @@ const DEF_UNCHEKED_COLOR = '#bfcbd9'
 const DEF_CHECKED_LABEL = 'on'
 const DEF_UNCHECKED_LABEL = 'off'
 
-const CORE_SIZE = 20
+const margin = 3
 // 11/25 = -.44
-const DEFAULT_HEIGHT = 22
-const DEFAULT_WIDTH = 50
+// const DEFAULT_HEIGHT = 22
+// const DEFAULT_WIDTH = 50
 
-const objectHas = (object, title) => {
+const contains = (object, title) => {
   return typeof object === 'object' && object.hasOwnProperty(title)
 }
 
@@ -40,30 +43,26 @@ export default {
       type: Boolean,
       default: false
     },
-    scale: {
-      type: Number,
-      default: 1
-    },
     color: {
       type: [String, Object],
       validator (value) {
-        if (typeof value === 'object') {
-          return value.checked || value.unchecked
-        }
-
-        return typeof value === 'string'
+        return typeof value === 'object'
+          ? (value.checked || value.unchecked)
+          : typeof value === 'string'
       }
     },
     labels: {
       type: [Boolean, Object],
       default: false,
       validator (value) {
-        if (typeof value === 'object') {
-          return value.checked || value.unchecked
-        }
-
-        return typeof value === 'boolean'
+        return typeof value === 'object'
+          ? (value.checked || value.unchecked)
+          : typeof value === 'boolean'
       }
+    },
+    height: {
+      type: Number,
+      default: 22
     },
     width: {
       type: Number,
@@ -71,18 +70,38 @@ export default {
     }
   },
   computed: {
+    className () {
+      let { toggled, disabled } = this
+
+      return [
+        'vue-js-switch',
+        { toggled, disabled }
+      ]
+    },
+
+    style () {
+      let { width, height } = this
+      let distance = width - height + margin
+
+      return {
+        '--height': height + 'px',
+        '--width': width + 'px',
+        '--transform-distance': distance + 'px'
+      }
+    },
+
     colorChecked () {
       if (typeof this.color !== 'object') {
         return this.color || DEF_CHECKED_COLOR
       }
 
-      return objectHas(this.color, 'checked')
+      return contains(this.color, 'checked')
         ? this.color.checked
         : DEF_CHECKED_COLOR
     },
 
     colorUnchecked () {
-      return objectHas(this.color, 'unchecked')
+      return contains(this.color, 'unchecked')
         ? this.color.unchecked
         : DEF_UNCHEKED_COLOR
     },
@@ -92,23 +111,20 @@ export default {
     },
 
     labelChecked () {
-      return objectHas(this.labels, 'checked')
+      return contains(this.labels, 'checked')
         ? this.labels.checked
         : DEF_CHECKED_LABEL
     },
 
     labelUnchecked () {
-      return objectHas(this.labels, 'unchecked')
+      return contains(this.labels, 'unchecked')
         ? this.labels.unchecked
         : DEF_UNCHECKED_LABEL
     },
 
     coreStyle () {
       return {
-        'background-color': this.colorCurrent,
-        'border-color': this.colorCurrent,
-        '--toggle-width': this.width + 'px',
-        '--toggle-transform-distance': (this.width - CORE_SIZE) + 'px'
+        'background-color': this.colorCurrent
       }
     }
   },
@@ -127,13 +143,17 @@ export default {
   methods: {
     toggle (event) {
       this.toggled = !this.toggled
-      this.$emit('change', {value: this.toggled, srcEvent: event})
+      this.$emit('change', { value: this.toggled, srcEvent: event })
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+$height: 22px;
+$margin: 3px;
+// $core-size: $height - 2 * $margin;
+
 .vue-js-switch {
   display: inline-block;
   position: relative;
@@ -141,10 +161,12 @@ export default {
   vertical-align: middle;
   user-select: none;
 
+  font-size: 10px;
+
   cursor: pointer;
 
-  line-height: 22px;
-  height: 22px;
+//  line-height: $height;
+//  height: $height;
 
   .v-switch-input {
     display: none;
@@ -153,10 +175,9 @@ export default {
   .v-switch-label {
     position: absolute;
     top: 0;
-    font-size: 10px;
     font-weight: 600;
-    line-height: 22px;
-    height: 22px;
+//    line-height: $height;
+//    height: $height;
     color: white;
 
     &.v-left {
@@ -172,43 +193,44 @@ export default {
     margin: 0;
     display: inline-block;
     position: relative;
-    border: 1px solid #bfcbd9;
+
     outline: 0;
-    border-radius: 12px;
+//    border-radius: ceil($height / 2);
     box-sizing: border-box;
     background: #bfcbd9;
     transition: border-color .3s, background-color .3s;
     user-select: none;
 
-    width: 50px;
-    width: var(--toggle-width);
-    height: 22px;
+//    width: 50px;
+//    width: var(--toggle-width);
+//    height: $height;
 
     &:before {
       display: block;
-      content: '';
+      position: absolute;
       overflow: hidden;
-
-      transform: translate(2px, 2px);
 
       top: 0;
       left: 0;
-      position: absolute;
-      border-radius: 100%;
-      transition: transform .3s;
-      width: 16px;
-      height: 16px;
+
+//      width: $core-size;
+//      height: $core-size;
+
       z-index: 20;
+
+      transform: translate($margin, $margin);
+      transition: transform .3s;
+
+      border-radius: 100%;
       background-color: #fff;
+      content: '';
     }
   }
 
   &.toggled {
-    .v-switch-core {
-      &:before {
-        transform: translate(30px, 2px);
-        transform: translate(var(--toggle-transform-distance), 2px);
-      }
+    .v-switch-core:before {
+      transform: translate(30px, $margin);
+      transform: translate(var(--transform-distance), $margin);
     }
   }
 
@@ -216,6 +238,28 @@ export default {
     pointer-events: none;
     cursor: not-allowed;
     opacity: 0.6;
+  }
+}
+
+.vue-js-switch {
+  line-height: var(--height);
+  height: var(--height);
+
+  .v-switch-label {
+    line-height: var(--height);
+    height: var(--height);
+  }
+
+  .v-switch-core {
+    border-radius: 999px;
+    width: 50px;
+    width: var(--width);
+    height: var(--height);
+
+    &:before {
+      width: calc(var(--height) - 6px);
+      height: calc(var(--height) - 6px);
+    }
   }
 }
 </style>

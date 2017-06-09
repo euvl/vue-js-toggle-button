@@ -24,10 +24,9 @@
 
         <toggle-button
           :value="false"
-          :width="120"
+          :width="320"
           color="#BB99CD"
-          :labels="{checked: '', unchecked: 'Only right label!'}"
-          />
+          :labels="{checked: '', unchecked: 'Only right label!'}"/>
 
         <toggle-button
           :value="false"
@@ -35,6 +34,15 @@
           :color="{unchecked: '#FF6699'}"
           :labels="{unchecked: 'Disabled button'}"
           :disabled="true"/>
+      </div>
+      <div style="padding-top: 20px;">
+        <toggle-button
+          id="changed-font"
+          :value="false"
+          :width="220"
+          :height="40"
+          :color="{checked: '#BE3D62', unchecked: '#FF877B'}"
+          :labels="{checked: 'HODOOOR!!!', unchecked: 'Hold the door?'}"/>
       </div>
     </div>
     <div class="padding">
@@ -114,5 +122,9 @@ li {
 
 a {
   color: #42b983;
+}
+
+.vue-js-switch#changed-font {
+  font-size: 16px !important;
 }
 </style>
