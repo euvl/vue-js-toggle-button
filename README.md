@@ -42,7 +42,6 @@ Use:
 | ---    | ---                      |
 | change | Triggered whenever state of the component changes. <br>Contains: <br>`value` - state of the object <br>`srcEvent` - source click event |
 
-<<<<<<< HEAD
 ### Browser compatibility
 
 Chrome: 48+
@@ -51,8 +50,8 @@ Firefox: 28+
 
 Safari: 10.1+
 
-Edge: :pray:
-=======
+Edge: :pray: for Microsoft
+
 ### Font size
 To change font size please use css:
 ```css
@@ -63,4 +62,3 @@ To change font size please use css:
 ```vue
 <toggle-button id="changed-font/>
 ```
->>>>>>> origin/master
