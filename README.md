@@ -44,16 +44,13 @@ Use:
 
 ### Browser compatibility
 
-Chrome: 48+
-
-Firefox: 28+
-
-Safari: 10.1+
-
-Edge: :pray: for Microsoft
+* Chrome: 48+
+* Firefox: 28+
+* Safari: 10.1+
+* Edge: :pray: for Microsoft
 
 ### Font size
-To change font size please use css:
+To change font size please use basic css:
 ```css
 .vue-js-switch#changed-font {
   font-size: 16px;
