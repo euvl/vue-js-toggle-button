@@ -34,9 +34,20 @@ Use:
 | color     | [String, Object]  | `#75C791`  | if `String` - color of the button when checked <br>If `Object` - colors for the button when checked/uncheked <br>Example: `{checked: '#00FF00', unchecked: '#FF0000'}`  |
 | labels    | [Boolean, Object] | false      | If `Boolean` - shows/hides default labels ("on" and "off") <br>If `Object` - sets custom labels for both states. <br>Example: `{checked: 'Foo', unchecked: 'Bar'}`   |
 | width     | Number            | 50         | Width of the button, default is 50 |
+| height    | Number            | 22         | Height of the button, default is 22 |
 
 ### Events
 
 | Name   | Description              |
 | ---    | ---                      |
 | change | Triggered whenever state of the component changes. <br>Contains: <br>`value` - state of the object <br>`srcEvent` - source click event |
+
+### Browser compatibility
+
+Chrome: 48+
+
+Firefox: 28+
+
+Safari: 10.1+
+
+Edge: :pray:
