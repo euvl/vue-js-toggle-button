@@ -124,6 +124,10 @@ a {
   color: #42b983;
 }
 
+.vue-js-switch {
+  margin: 2px;
+}
+
 .vue-js-switch#changed-font {
   font-size: 16px !important;
 }
