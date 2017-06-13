@@ -126,6 +126,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+//
+//
+//
 
 var DEF_CHECKED_COLOR = '#75C791';
 var DEF_UNCHEKED_COLOR = '#bfcbd9';
@@ -186,6 +189,9 @@ var contains = function contains(object, title) {
 
 
       return ['vue-js-switch', { toggled: toggled, disabled: disabled }];
+    },
+    ariaChecked: function ariaChecked() {
+      return this.toggled.toString();
     },
     style: function style() {
       var width = this.width,
@@ -400,7 +406,10 @@ module.exports = function normalizeComponent (
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('label', {
     class: _vm.className,
-    style: (_vm.style)
+    style: (_vm.style),
+    attrs: {
+      "role": "checkbox"
+    }
   }, [_c('input', {
     staticClass: "v-switch-input",
     attrs: {
@@ -414,7 +423,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), _c('span', {
     staticClass: "v-switch-core",
-    style: (_vm.coreStyle)
+    style: (_vm.coreStyle),
+    attrs: {
+      "aria-checked": _vm.ariaChecked
+    }
   }), _vm._v(" "), (_vm.labels) ? _c('div', [(_vm.toggled) ? _c('span', {
     staticClass: "v-switch-label v-left"
   }, [_vm._v(_vm._s(_vm.labelChecked))]) : _c('span', {

@@ -1,10 +1,13 @@
 <template>
 <label :class="className"
-       :style="style">
+       :style="style"
+       role="checkbox">
   <input type="checkbox"
          class="v-switch-input"
          @change.stop="toggle">
-  <span class="v-switch-core" :style="coreStyle"></span>
+  <span class="v-switch-core"
+        :style="coreStyle"
+        :aria-checked="ariaChecked"></span>
   <div v-if="labels">
     <span class="v-switch-label v-left" v-if="toggled">{{labelChecked}}</span>
     <span class="v-switch-label v-right" v-else>{{labelUnchecked}}</span>
@@ -77,6 +80,10 @@ export default {
         'vue-js-switch',
         { toggled, disabled }
       ]
+    },
+
+    ariaChecked () {
+      return this.toggled.toString()
     },
 
     style () {
