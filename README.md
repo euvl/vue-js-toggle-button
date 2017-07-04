@@ -1,6 +1,6 @@
-### Vue.js 2.0+ toggle / switch button - simple, pretty, customizable.
-
 [![npm version](https://badge.fury.io/js/vue-js-toggle-button.svg)](https://badge.fury.io/js/vue-js-toggle-button)
+
+### Vue.js 2 toggle / switch button - simple, pretty, customizable.
 
 ![Imgur](http://i.imgur.com/a2Hf7pm.png)
 
@@ -20,7 +20,7 @@ Vue.use(ToggleButton)
 Use:
 ```xml
 <toggle-button @change="onChangeEventHandler"/>
-<toggle-button :value="false" :color="#82C7EB" :sync="true" :labels="true"/>
+<toggle-button :value="false" color="#82C7EB" :sync="true" :labels="true"/>
 <toggle-button :value="true" :labels="{checked: 'Foo', unchecked: 'Bar'}"/>
 ```
 
