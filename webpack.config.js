@@ -7,7 +7,7 @@ module.exports = {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
     filename: 'index.js',
-    library:'VueJsToggleButton',
+    library:'vue-js-toggle-button',
     libraryTarget: 'umd'
   },
   module: {
@@ -26,13 +26,6 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /node_modules/
-      },
-      {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]?[hash]'
-        }
       }
     ]
   },
@@ -44,20 +37,11 @@ module.exports = {
       'vue$': 'vue/dist/vue.esm.js'
     }
   },
-  devServer: {
-    historyApiFallback: true,
-    noInfo: true
-  },
   performance: {
     hints: false
   },
   devtool: '#source-map',
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"'
-      }
-    }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
     })

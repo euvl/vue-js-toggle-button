@@ -4,9 +4,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define(["vue"], factory);
 	else if(typeof exports === 'object')
-		exports["VueJsToggleButton"] = factory(require("vue"));
+		exports["vue-js-toggle-button"] = factory(require("vue"));
 	else
-		root["VueJsToggleButton"] = factory(root["vue"]);
+		root["vue-js-toggle-button"] = factory(root["vue"]);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_1__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache

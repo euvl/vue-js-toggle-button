@@ -23,9 +23,6 @@ const DEF_CHECKED_LABEL = 'on'
 const DEF_UNCHECKED_LABEL = 'off'
 
 const margin = 3
-// 11/25 = -.44
-// const DEFAULT_HEIGHT = 22
-// const DEFAULT_WIDTH = 50
 
 const contains = (object, title) => {
   return typeof object === 'object' && object.hasOwnProperty(title)
