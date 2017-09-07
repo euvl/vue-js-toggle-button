@@ -137,9 +137,6 @@ var DEF_CHECKED_LABEL = 'on';
 var DEF_UNCHECKED_LABEL = 'off';
 
 var margin = 3;
-// 11/25 = -.44
-// const DEFAULT_HEIGHT = 22
-// const DEFAULT_WIDTH = 50
 
 var contains = function contains(object, title) {
   return (typeof object === 'undefined' ? 'undefined' : _typeof(object)) === 'object' && object.hasOwnProperty(title);
@@ -246,6 +243,7 @@ var contains = function contains(object, title) {
   methods: {
     toggle: function toggle(event) {
       this.toggled = !this.toggled;
+      this.$emit('input', this.toggled);
       this.$emit('change', { value: this.toggled, srcEvent: event });
     }
   }

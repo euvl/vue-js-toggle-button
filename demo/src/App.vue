@@ -38,11 +38,12 @@
       <div style="padding-top: 20px;">
         <toggle-button
           id="changed-font"
-          :value="false"
+          v-model="hodor"
           :width="220"
           :height="40"
           :color="{checked: '#BE3D62', unchecked: '#FF877B'}"
           :labels="{checked: 'HODOOOR!!!', unchecked: 'Hold the door?'}"/>
+          {{hodor}}
       </div>
     </div>
     <div class="padding">
@@ -74,7 +75,8 @@ export default {
         {color: '#796465', value: false},
         {color: '#79BD8F', value: false},
         {color: '#00A388', value: false}
-      ]
+      ],
+      hodor: false
     }
   },
   mounted () {
