@@ -235,6 +235,7 @@ $margin: 3px;
   &.toggled {
     .v-switch-core:before {
       transform: translate(30px, $margin);
+      transform: translate(41px, $margin);
       transform: translate(var(--d), $margin);
     }
   }
@@ -247,10 +248,14 @@ $margin: 3px;
 }
 
 .vue-js-switch {
+  line-height: 22px;
+  height: 22px;
   line-height: var(--h);
   height: var(--h);
 
   .v-switch-label {
+    line-height: 22px;
+    height: 22px;
     line-height: var(--h);
     height: var(--h);
   }
@@ -259,10 +264,13 @@ $margin: 3px;
     border-radius: 999px;
     width: 50px;
     width: var(--w);
+    height: 22px;
     height: var(--h);
 
     &:before {
+      width: 16px;
       width: calc(var(--h) - 6px);
+      height: 16px;
       height: calc(var(--h) - 6px);
     }
   }
