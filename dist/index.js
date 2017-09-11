@@ -426,10 +426,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "aria-checked": _vm.ariaChecked
     }
   }), _vm._v(" "), (_vm.labels) ? _c('div', [(_vm.toggled) ? _c('span', {
-    staticClass: "v-switch-label v-left"
-  }, [_vm._v(_vm._s(_vm.labelChecked))]) : _c('span', {
-    staticClass: "v-switch-label v-right"
-  }, [_vm._v(_vm._s(_vm.labelUnchecked))])]) : _vm._e()])
+    staticClass: "v-switch-label v-left",
+    domProps: {
+      "innerHTML": _vm._s(_vm.labelChecked)
+    }
+  }) : _c('span', {
+    staticClass: "v-switch-label v-right",
+    domProps: {
+      "innerHTML": _vm._s(_vm.labelUnchecked)
+    }
+  })]) : _vm._e()])
 },staticRenderFns: []}
 
 /***/ }),
