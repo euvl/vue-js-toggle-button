@@ -9,8 +9,8 @@
         :style="coreStyle"
         :aria-checked="ariaChecked"></span>
   <div v-if="labels">
-    <span class="v-switch-label v-left" v-if="toggled">{{labelChecked}}</span>
-    <span class="v-switch-label v-right" v-else>{{labelUnchecked}}</span>
+    <span class="v-switch-label v-left" v-if="toggled" v-html="labelChecked"></span>
+    <span class="v-switch-label v-right" v-else v-html="labelUnchecked"></span>
   </div>
 </label>
 </template>
