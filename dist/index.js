@@ -129,6 +129,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+//
+//
 
 var DEF_CHECKED_COLOR = '#75C791';
 var DEF_UNCHEKED_COLOR = '#bfcbd9';
@@ -406,7 +408,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     class: _vm.className,
     style: (_vm.style),
     attrs: {
+      "tabindex": "0",
       "role": "checkbox"
+    },
+    on: {
+      "keydown": function($event) {
+        if (!('button' in $event) && _vm._k($event.keyCode, "space", 32)) { return null; }
+        $event.stopPropagation();
+        _vm.toggle($event)
+      }
     }
   }, [_c('input', {
     staticClass: "v-switch-input",
