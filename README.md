@@ -44,6 +44,8 @@ Use:
 | width     | Number            | 50         | Width of the button, default is 50 |
 | height    | Number            | 22         | Height of the button, default is 22 |
 
+`labels` object accepts HTML text (for example, you can use FontAwesome for checked/unchecked states).
+
 ### Events
 
 | Name   | Description              |
