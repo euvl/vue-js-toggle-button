@@ -1,6 +1,8 @@
 <template>
 <label :class="className"
        :style="style"
+       tabindex="0"
+       @keydown.space.stop="toggle"
        role="checkbox">
   <input type="checkbox"
          class="v-switch-input"
