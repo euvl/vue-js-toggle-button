@@ -54,14 +54,15 @@ Use:
 
 ### SSR
 
-Include plugin in your nuxt.config.js file:
-```
+Include plugin in your `nuxt.config.js` file:
+```javascript
 module.exports = {
   plugins: ['~plugins/vue-js-toggle-button']
 }
 ```
-And your plugins/vue-js-modal.js will look like:
-```
+And your `plugins/vue-js-toggle-button.js` will look like:
+
+```javascript
 import Vue from 'vue'
 import Button from 'vue-js-toggle-button/dist/ssr.index'
 
