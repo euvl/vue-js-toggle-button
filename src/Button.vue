@@ -156,6 +156,8 @@ export default {
 
 <style lang="scss" scoped>
 $height: 22px;
+$width: 50px;
+
 $margin: 3px;
 // $core-size: $height - 2 * $margin;
 
@@ -232,12 +234,6 @@ $margin: 3px;
     }
   }
 
-  &.toggled {
-    .v-switch-core:before {
-      transform: translate(30px, $margin);
-      transform: translate(var(--d), $margin);
-    }
-  }
 
   &.disabled {
     pointer-events: none;
@@ -247,23 +243,42 @@ $margin: 3px;
 }
 
 .vue-js-switch {
+  line-height: $height;
+  height: $height;
+
   line-height: var(--h);
   height: var(--h);
 
   .v-switch-label {
+    line-height: $height;
+    height: $height;
+
     line-height: var(--h);
     height: var(--h);
   }
 
   .v-switch-core {
     border-radius: 999px;
-    width: 50px;
+
+    width: $width;
+    height: $height;
+
     width: var(--w);
     height: var(--h);
 
     &:before {
+      width: calc(#{$height} - 6px);
+      height: calc(#{$height} - 6px);
+
       width: calc(var(--h) - 6px);
       height: calc(var(--h) - 6px);
+    }
+  }
+
+  &.toggled {
+    .v-switch-core:before {
+      transform: translate(30px, $margin);
+      transform: translate(var(--d), $margin);
     }
   }
 }

@@ -1,5 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
+var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
 module.exports = {
   entry: './src/index.js',
@@ -43,6 +44,11 @@ module.exports = {
   plugins: [
     new webpack.LoaderOptionsPlugin({
       minimize: true
+    }),
+    new OptimizeCSSPlugin({
+      cssProcessorOptions: {
+        safe: true
+      }
     })
   ]
 }
