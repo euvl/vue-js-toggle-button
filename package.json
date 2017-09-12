@@ -5,7 +5,9 @@
   "author": "euvl <yev.vlasenko@gmail.com>",
   "private": false,
   "scripts": {
-    "build": "webpack --progress --hide-modules"
+    "build:client": "webpack --config ./webpack.config.js --progress --hide-modules",
+    "build:ssr": "webpack --config ./webpack.ssr.config.js  --progress --hide-modules",
+    "build": "npm run build:client && npm run build:ssr"
   },
   "main": "dist/index.js",
   "repository": {
@@ -35,6 +37,7 @@
     "vue": "^2.0.0",
     "vue-loader": "^11.1.4",
     "vue-template-compiler": "^2.0.0",
-    "webpack": "^2.2.0"
+    "webpack": "^2.2.0",
+    "webpack-merge": "^4.1.0"
   }
 }
