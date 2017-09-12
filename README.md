@@ -52,12 +52,28 @@ Use:
 | ---    | ---                      |
 | change | Triggered whenever state of the component changes. <br>Contains: <br>`value` - state of the object <br>`srcEvent` - source click event |
 
+### SSR
+
+Include plugin in your nuxt.config.js file:
+```
+module.exports = {
+  plugins: ['~plugins/vue-js-toggle-button']
+}
+```
+And your plugins/vue-js-modal.js will look like:
+```
+import Vue from 'vue'
+import Button from 'vue-js-toggle-button/dist/ssr.index'
+
+Vue.use(Button)
+```
+
 ### Browser compatibility
 
 * Chrome: 48+
 * Firefox: 28+
 * Safari: 10.1+
-* Edge: :pray: for Microsoft
+* Edge: :pray: for Microsoft (works but width/height will be set to default in older versions)
 
 ### Font size
 To change font size please use basic css:
