@@ -1,12 +1,12 @@
 <template>
-<label :class="className"
-       role="checkbox">
+<label role="checkbox"
+       :class="className"
+       :aria-checked="ariaChecked">
   <input type="checkbox"
          class="v-switch-input"
          @change.stop="toggle">
   <div class="v-switch-core"
-        :style="coreStyle"
-        :aria-checked="ariaChecked">
+        :style="coreStyle">
     <div class="v-switch-button"
         :style="buttonStyle"/>
   </div>
@@ -89,10 +89,7 @@ export default {
     className () {
       let { toggled, disabled } = this
 
-      return [
-        'vue-js-switch',
-        { toggled, disabled }
-      ]
+      return ['vue-js-switch', { toggled, disabled }]
     },
 
     ariaChecked () {

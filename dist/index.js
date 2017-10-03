@@ -442,7 +442,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('label', {
     class: _vm.className,
     attrs: {
-      "role": "checkbox"
+      "role": "checkbox",
+      "aria-checked": _vm.ariaChecked
     }
   }, [_c('input', {
     staticClass: "v-switch-input",
@@ -457,10 +458,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "v-switch-core",
-    style: (_vm.coreStyle),
-    attrs: {
-      "aria-checked": _vm.ariaChecked
-    }
+    style: (_vm.coreStyle)
   }, [_c('div', {
     staticClass: "v-switch-button",
     style: (_vm.buttonStyle)
