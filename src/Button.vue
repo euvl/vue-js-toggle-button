@@ -1,32 +1,44 @@
 <template>
 <label :class="className"
-       :style="style"
        role="checkbox">
   <input type="checkbox"
          class="v-switch-input"
          @change.stop="toggle">
-  <span class="v-switch-core"
+  <div class="v-switch-core"
         :style="coreStyle"
-        :aria-checked="ariaChecked"></span>
-  <div v-if="labels">
-    <span class="v-switch-label v-left" v-if="toggled" v-html="labelChecked"></span>
-    <span class="v-switch-label v-right" v-else v-html="labelUnchecked"></span>
+        :aria-checked="ariaChecked">
+    <div class="v-switch-button"
+        :style="buttonStyle"/>
   </div>
+  <template v-if="labels">
+    <span class="v-switch-label v-left"
+          :style="labelStyle"
+          v-if="toggled"
+          v-html="labelChecked"/>
+    <span class="v-switch-label v-right"
+          :style="labelStyle"
+          v-else
+          v-html="labelUnchecked"/>
+  </template>
 </label>
 </template>
 
 <script>
-const DEF_CHECKED_COLOR = '#75C791'
-const DEF_UNCHEKED_COLOR = '#bfcbd9'
-
-const DEF_CHECKED_LABEL = 'on'
-const DEF_UNCHECKED_LABEL = 'off'
-
-const margin = 3
+const constants = {
+  colorChecked: '#75C791',
+  colorUnchecked: '#bfcbd9',
+  labelChecked: 'on',
+  labelUnchecked: 'off',
+  width: 50,
+  height: 22,
+  margin: 3
+}
 
 const contains = (object, title) => {
   return typeof object === 'object' && object.hasOwnProperty(title)
 }
+
+const px = v => v + 'px'
 
 export default {
   name: 'ToggleButton',
@@ -42,6 +54,10 @@ export default {
     sync: {
       type: Boolean,
       default: false
+    },
+    speed: {
+      type: Number,
+      default: 300
     },
     color: {
       type: [String, Object],
@@ -62,11 +78,11 @@ export default {
     },
     height: {
       type: Number,
-      default: 22
+      default: constants.height
     },
     width: {
       type: Number,
-      default: 50
+      default: constants.width
     }
   },
   computed: {
@@ -83,53 +99,76 @@ export default {
       return this.toggled.toString()
     },
 
-    style () {
-      let { width, height } = this
-      let distance = width - height + margin
-
+    coreStyle () {
       return {
-        '--h': height + 'px',
-        '--w': width + 'px',
-        '--d': distance + 'px'
+        width: px(this.width),
+        height: px(this.height),
+        backgroundColor: this.colorCurrent,
+        borderRadius: px(Math.round(this.height / 2))
+      }
+    },
+
+    buttonRadius () {
+      return this.height - constants.margin * 2;
+    },
+
+    distance () {
+      return px(this.width - this.height + constants.margin)
+    },
+
+    buttonStyle () {
+      return {
+        width: px(this.buttonRadius),
+        height: px(this.buttonRadius),
+        transition: `transform ${this.speed}ms`,
+        transform: this.toggled
+          ? `translate3d(${this.distance}, 3px, 0px)`
+          : null
+      }
+    },
+
+    labelStyle () {
+      return {
+        lineHeight: px(this.height)
       }
     },
 
     colorChecked () {
-      if (typeof this.color !== 'object') {
-        return this.color || DEF_CHECKED_COLOR
+      let { color } = this
+
+      if (typeof color !== 'object') {
+        return color || constants.colorChecked
       }
 
-      return contains(this.color, 'checked')
-        ? this.color.checked
-        : DEF_CHECKED_COLOR
+      return contains(color, 'checked')
+        ? color.checked
+        : constants.colorChecked
     },
 
     colorUnchecked () {
-      return contains(this.color, 'unchecked')
-        ? this.color.unchecked
-        : DEF_UNCHEKED_COLOR
+      let { color } = this
+
+      return contains(color, 'unchecked')
+        ? color.unchecked
+        : constants.colorUnchecked
     },
 
     colorCurrent () {
-      return this.toggled ? this.colorChecked : this.colorUnchecked
+      return this.toggled
+        ? this.colorChecked
+        : this.colorUnchecked
     },
 
     labelChecked () {
       return contains(this.labels, 'checked')
         ? this.labels.checked
-        : DEF_CHECKED_LABEL
+        : constants.labelChecked
     },
 
     labelUnchecked () {
       return contains(this.labels, 'unchecked')
         ? this.labels.unchecked
-        : DEF_UNCHECKED_LABEL
-    },
-
-    coreStyle () {
-      return {
-        'background-color': this.colorCurrent
-      }
+        : constants.labelUnchecked
     }
   },
   watch: {
@@ -148,18 +187,17 @@ export default {
     toggle (event) {
       this.toggled = !this.toggled
       this.$emit('input', this.toggled)
-      this.$emit('change', { value: this.toggled, srcEvent: event })
+      this.$emit('change', {
+        value: this.toggled,
+        srcEvent: event
+      })
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-$height: 22px;
-$width: 50px;
-
 $margin: 3px;
-// $core-size: $height - 2 * $margin;
 
 .vue-js-switch {
   display: inline-block;
@@ -167,13 +205,8 @@ $margin: 3px;
   overflow: hidden;
   vertical-align: middle;
   user-select: none;
-
   font-size: 10px;
-
   cursor: pointer;
-
-//  line-height: $height;
-//  height: $height;
 
   .v-switch-input {
     display: none;
@@ -183,9 +216,9 @@ $margin: 3px;
     position: absolute;
     top: 0;
     font-weight: 600;
-//    line-height: $height;
-//    height: $height;
     color: white;
+
+    z-index: 2;
 
     &.v-left {
       left: 10px;
@@ -197,22 +230,17 @@ $margin: 3px;
   }
 
   .v-switch-core {
-    margin: 0;
-    display: inline-block;
+    display: block;
     position: relative;
+    box-sizing: border-box;
 
     outline: 0;
-//    border-radius: ceil($height / 2);
-    box-sizing: border-box;
-    background: #bfcbd9;
+    margin: 0;
+
     transition: border-color .3s, background-color .3s;
     user-select: none;
 
-//    width: 50px;
-//    width: var(--toggle-width);
-//    height: $height;
-
-    &:before {
+    .v-switch-button {
       display: block;
       position: absolute;
       overflow: hidden;
@@ -220,66 +248,17 @@ $margin: 3px;
       top: 0;
       left: 0;
 
-//      width: $core-size;
-//      height: $core-size;
+      z-index: 3;
 
-      z-index: 20;
-
-      transform: translate($margin, $margin);
-      transition: transform .3s;
-
+      transform: translate3d($margin, $margin, 0);
       border-radius: 100%;
       background-color: #fff;
-      content: '';
     }
   }
-
 
   &.disabled {
     pointer-events: none;
-    cursor: not-allowed;
     opacity: 0.6;
-  }
-}
-
-.vue-js-switch {
-  line-height: $height;
-  height: $height;
-
-  line-height: var(--h);
-  height: var(--h);
-
-  .v-switch-label {
-    line-height: $height;
-    height: $height;
-
-    line-height: var(--h);
-    height: var(--h);
-  }
-
-  .v-switch-core {
-    border-radius: 999px;
-
-    width: $width;
-    height: $height;
-
-    width: var(--w);
-    height: var(--h);
-
-    &:before {
-      width: calc(#{$height} - 6px);
-      height: calc(#{$height} - 6px);
-
-      width: calc(var(--h) - 6px);
-      height: calc(var(--h) - 6px);
-    }
-  }
-
-  &.toggled {
-    .v-switch-core:before {
-      transform: translate(30px, $margin);
-      transform: translate(var(--d), $margin);
-    }
   }
 }
 </style>

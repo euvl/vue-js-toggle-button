@@ -41,6 +41,7 @@
           v-model="hodor"
           :width="220"
           :height="40"
+          :speed="480"
           :color="{checked: '#BE3D62', unchecked: '#FF877B'}"
           :labels="{checked: 'HODOOOR!!!', unchecked: 'Hold the door?'}"/>
           {{hodor}}
