@@ -129,17 +129,31 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
-var DEF_CHECKED_COLOR = '#75C791';
-var DEF_UNCHEKED_COLOR = '#bfcbd9';
-
-var DEF_CHECKED_LABEL = 'on';
-var DEF_UNCHECKED_LABEL = 'off';
-
-var margin = 3;
+var constants = {
+  colorChecked: '#75C791',
+  colorUnchecked: '#bfcbd9',
+  labelChecked: 'on',
+  labelUnchecked: 'off',
+  width: 50,
+  height: 22,
+  margin: 3
+};
 
 var contains = function contains(object, title) {
   return (typeof object === 'undefined' ? 'undefined' : _typeof(object)) === 'object' && object.hasOwnProperty(title);
+};
+
+var px = function px(v) {
+  return v + 'px';
 };
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -157,6 +171,10 @@ var contains = function contains(object, title) {
       type: Boolean,
       default: false
     },
+    speed: {
+      type: Number,
+      default: 300
+    },
     color: {
       type: [String, Object],
       validator: function validator(value) {
@@ -172,11 +190,11 @@ var contains = function contains(object, title) {
     },
     height: {
       type: Number,
-      default: 22
+      default: constants.height
     },
     width: {
       type: Number,
-      default: 50
+      default: constants.width
     }
   },
   computed: {
@@ -190,41 +208,57 @@ var contains = function contains(object, title) {
     ariaChecked: function ariaChecked() {
       return this.toggled.toString();
     },
-    style: function style() {
-      var width = this.width,
-          height = this.height;
-
-      var distance = width - height + margin;
-
+    coreStyle: function coreStyle() {
       return {
-        '--h': height + 'px',
-        '--w': width + 'px',
-        '--d': distance + 'px'
+        width: px(this.width),
+        height: px(this.height),
+        backgroundColor: this.colorCurrent,
+        borderRadius: px(Math.round(this.height / 2))
+      };
+    },
+    buttonRadius: function buttonRadius() {
+      return this.height - constants.margin * 2;
+    },
+    distance: function distance() {
+      return px(this.width - this.height + constants.margin);
+    },
+    buttonStyle: function buttonStyle() {
+      return {
+        width: px(this.buttonRadius),
+        height: px(this.buttonRadius),
+        transition: 'transform ' + this.speed + 'ms',
+        transform: this.toggled ? 'translate3d(' + this.distance + ', 3px, 0px)' : null
+      };
+    },
+    labelStyle: function labelStyle() {
+      return {
+        lineHeight: px(this.height)
       };
     },
     colorChecked: function colorChecked() {
-      if (_typeof(this.color) !== 'object') {
-        return this.color || DEF_CHECKED_COLOR;
+      var color = this.color;
+
+
+      if ((typeof color === 'undefined' ? 'undefined' : _typeof(color)) !== 'object') {
+        return color || constants.colorChecked;
       }
 
-      return contains(this.color, 'checked') ? this.color.checked : DEF_CHECKED_COLOR;
+      return contains(color, 'checked') ? color.checked : constants.colorChecked;
     },
     colorUnchecked: function colorUnchecked() {
-      return contains(this.color, 'unchecked') ? this.color.unchecked : DEF_UNCHEKED_COLOR;
+      var color = this.color;
+
+
+      return contains(color, 'unchecked') ? color.unchecked : constants.colorUnchecked;
     },
     colorCurrent: function colorCurrent() {
       return this.toggled ? this.colorChecked : this.colorUnchecked;
     },
     labelChecked: function labelChecked() {
-      return contains(this.labels, 'checked') ? this.labels.checked : DEF_CHECKED_LABEL;
+      return contains(this.labels, 'checked') ? this.labels.checked : constants.labelChecked;
     },
     labelUnchecked: function labelUnchecked() {
-      return contains(this.labels, 'unchecked') ? this.labels.unchecked : DEF_UNCHECKED_LABEL;
-    },
-    coreStyle: function coreStyle() {
-      return {
-        'background-color': this.colorCurrent
-      };
+      return contains(this.labels, 'unchecked') ? this.labels.unchecked : constants.labelUnchecked;
     }
   },
   watch: {
@@ -244,7 +278,10 @@ var contains = function contains(object, title) {
     toggle: function toggle(event) {
       this.toggled = !this.toggled;
       this.$emit('input', this.toggled);
-      this.$emit('change', { value: this.toggled, srcEvent: event });
+      this.$emit('change', {
+        value: this.toggled,
+        srcEvent: event
+      });
     }
   }
 });
@@ -279,7 +316,7 @@ exports = module.exports = __webpack_require__(5)();
 
 
 // module
-exports.push([module.i, ".vue-js-switch[data-v-25adc6c0]{display:inline-block;position:relative;overflow:hidden;vertical-align:middle;user-select:none;font-size:10px;cursor:pointer}.vue-js-switch .v-switch-input[data-v-25adc6c0]{display:none}.vue-js-switch .v-switch-label[data-v-25adc6c0]{position:absolute;top:0;font-weight:600;color:#fff}.vue-js-switch .v-switch-label.v-left[data-v-25adc6c0]{left:10px}.vue-js-switch .v-switch-label.v-right[data-v-25adc6c0]{right:10px}.vue-js-switch .v-switch-core[data-v-25adc6c0]{margin:0;display:inline-block;position:relative;outline:0;box-sizing:border-box;background:#bfcbd9;transition:border-color .3s,background-color .3s;user-select:none}.vue-js-switch .v-switch-core[data-v-25adc6c0]:before{display:block;position:absolute;overflow:hidden;top:0;left:0;z-index:20;transform:translate(3px,3px);transition:transform .3s;border-radius:100%;background-color:#fff;content:\"\"}.vue-js-switch.disabled[data-v-25adc6c0]{pointer-events:none;cursor:not-allowed;opacity:.6}.vue-js-switch .v-switch-label[data-v-25adc6c0],.vue-js-switch[data-v-25adc6c0]{line-height:22px;height:22px;line-height:var(--h);height:var(--h)}.vue-js-switch .v-switch-core[data-v-25adc6c0]{border-radius:999px;width:50px;height:22px;width:var(--w);height:var(--h)}.vue-js-switch .v-switch-core[data-v-25adc6c0]:before{width:16px;height:16px;width:calc(var(--h) - 6px);height:calc(var(--h) - 6px)}.vue-js-switch.toggled .v-switch-core[data-v-25adc6c0]:before{transform:translate(30px,3px);transform:translate(var(--d),3px)}", ""]);
+exports.push([module.i, ".vue-js-switch[data-v-25adc6c0]{display:inline-block;position:relative;overflow:hidden;vertical-align:middle;user-select:none;font-size:10px;cursor:pointer}.vue-js-switch .v-switch-input[data-v-25adc6c0]{display:none}.vue-js-switch .v-switch-label[data-v-25adc6c0]{position:absolute;top:0;font-weight:600;color:#fff;z-index:2}.vue-js-switch .v-switch-label.v-left[data-v-25adc6c0]{left:10px}.vue-js-switch .v-switch-label.v-right[data-v-25adc6c0]{right:10px}.vue-js-switch .v-switch-core[data-v-25adc6c0]{display:block;position:relative;box-sizing:border-box;outline:0;margin:0;transition:border-color .3s,background-color .3s;user-select:none}.vue-js-switch .v-switch-core .v-switch-button[data-v-25adc6c0]{display:block;position:absolute;overflow:hidden;top:0;left:0;z-index:3;transform:translate3d(3px,3px,0);border-radius:100%;background-color:#fff}.vue-js-switch.disabled[data-v-25adc6c0]{pointer-events:none;opacity:.6}", ""]);
 
 // exports
 
@@ -404,9 +441,9 @@ module.exports = function normalizeComponent (
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('label', {
     class: _vm.className,
-    style: (_vm.style),
     attrs: {
-      "role": "checkbox"
+      "role": "checkbox",
+      "aria-checked": _vm.ariaChecked
     }
   }, [_c('input', {
     staticClass: "v-switch-input",
@@ -419,23 +456,25 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.toggle($event)
       }
     }
-  }), _vm._v(" "), _c('span', {
+  }), _vm._v(" "), _c('div', {
     staticClass: "v-switch-core",
-    style: (_vm.coreStyle),
-    attrs: {
-      "aria-checked": _vm.ariaChecked
-    }
-  }), _vm._v(" "), (_vm.labels) ? _c('div', [(_vm.toggled) ? _c('span', {
+    style: (_vm.coreStyle)
+  }, [_c('div', {
+    staticClass: "v-switch-button",
+    style: (_vm.buttonStyle)
+  })]), _vm._v(" "), (_vm.labels) ? [(_vm.toggled) ? _c('span', {
     staticClass: "v-switch-label v-left",
+    style: (_vm.labelStyle),
     domProps: {
       "innerHTML": _vm._s(_vm.labelChecked)
     }
   }) : _c('span', {
     staticClass: "v-switch-label v-right",
+    style: (_vm.labelStyle),
     domProps: {
       "innerHTML": _vm._s(_vm.labelUnchecked)
     }
-  })]) : _vm._e()])
+  })] : _vm._e()], 2)
 },staticRenderFns: []}
 
 /***/ }),
