@@ -76,7 +76,7 @@ Vue.use(Button)
 * Chrome: 48+
 * Firefox: 28+
 * Safari: 10.1+
-* Edge: :pray: for Microsoft (works but width/height will be set to default in older versions)
+* IE: 11+
 
 ### Font size
 To change font size please use basic css:
