@@ -73,9 +73,9 @@ Vue.use(Button)
 
 ### Browser compatibility
 
-* Chrome: 48+
-* Firefox: 28+
-* Safari: 10.1+
+* Chrome: 40+
+* Firefox: 25+
+* Safari: 10+
 * IE: 11+
 
 ### Font size
