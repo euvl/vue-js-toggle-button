@@ -41,7 +41,8 @@ Use:
 | sync      | Boolean           | false       | If set to `true`, will be watching changes in `value` property and overwrite the current state of the button whenever `value` prop. changes |
 | speed     | Number            | 300        | Transition time for the animation   |
 | disabled  | Boolean           | false      | Button does not react on mouse events |
-| color     | [String, Object]  | `#75C791`  | if `String` - color of the button when checked <br>If `Object` - colors for the button when checked/uncheked <br>Example: `{checked: '#00FF00', unchecked: '#FF0000'}`  |
+| color     | [String, Object]  | `#75C791`  | If `String` - color of the button when checked <br>If `Object` - colors for the button when checked/uncheked <br>Example: `{checked: '#00FF00', unchecked: '#FF0000'}`  |
+| cssColors | Boolean           | false      | If `true` - deactivates the setting of colors through inline styles in favor of using CSS styling |
 | labels    | [Boolean, Object] | false      | If `Boolean` - shows/hides default labels ("on" and "off") <br>If `Object` - sets custom labels for both states. <br>Example: `{checked: 'Foo', unchecked: 'Bar'}`   |
 | width     | Number            | 50         | Width of the button, default is 50 |
 | height    | Number            | 22         | Height of the button, default is 22 |
