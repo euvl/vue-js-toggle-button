@@ -141,6 +141,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 var constants = {
   colorChecked: '#75C791',
   colorUnchecked: '#bfcbd9',
+  cssColors: false,
   labelChecked: 'on',
   labelUnchecked: 'off',
   width: 50,
@@ -181,6 +182,10 @@ var px = function px(v) {
         return (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' ? value.checked || value.unchecked : typeof value === 'string';
       }
     },
+    cssColors: {
+      type: Boolean,
+      default: false
+    },
     labels: {
       type: [Boolean, Object],
       default: false,
@@ -212,7 +217,7 @@ var px = function px(v) {
       return {
         width: px(this.width),
         height: px(this.height),
-        backgroundColor: this.colorCurrent,
+        backgroundColor: this.cssColors ? null : this.colorCurrent,
         borderRadius: px(Math.round(this.height / 2))
       };
     },
