@@ -177,7 +177,7 @@ export default {
   },
   data () {
     return {
-      toggled: this.value
+      toggled: !!this.value
     }
   },
   methods: {

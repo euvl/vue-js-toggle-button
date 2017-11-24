@@ -270,7 +270,7 @@ var px = function px(v) {
   },
   data: function data() {
     return {
-      toggled: this.value
+      toggled: !!this.value
     };
   },
 
