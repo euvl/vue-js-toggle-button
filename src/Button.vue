@@ -176,7 +176,7 @@ export default {
   watch: {
     value (value) {
       if (this.sync) {
-        this.toggled = value
+        this.toggled = !!value
       }
     }
   },

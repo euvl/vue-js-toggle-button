@@ -269,7 +269,7 @@ var px = function px(v) {
   watch: {
     value: function value(_value) {
       if (this.sync) {
-        this.toggled = _value;
+        this.toggled = !!_value;
       }
     }
   },
