@@ -220,8 +220,6 @@ $margin: 3px;
     font-weight: 600;
     color: white;
 
-    z-index: 2;
-
     &.v-left {
       left: 10px;
     }
@@ -249,8 +247,6 @@ $margin: 3px;
 
       top: 0;
       left: 0;
-
-      z-index: 3;
 
       transform: translate3d($margin, $margin, 0);
       border-radius: 100%;
