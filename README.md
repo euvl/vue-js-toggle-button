@@ -91,5 +91,5 @@ To change font size please use basic css:
 }
 ```
 ```vue
-<toggle-button id="changed-font/>
+<toggle-button id="changed-font"/>
 ```
