@@ -68,6 +68,14 @@ export default {
           : typeof value === 'string'
       }
     },
+    buttonColor: {
+      type: [String, Object],
+      validator (value) {
+        return typeof value === 'object'
+          ? (value.checked || value.unchecked)
+          : typeof value === 'string'
+      }
+    },
     cssColors: {
       type: Boolean,
       default: false
@@ -125,7 +133,8 @@ export default {
         transition: `transform ${this.speed}ms`,
         transform: this.toggled
           ? `translate3d(${this.distance}, 3px, 0px)`
-          : null
+          : null,
+        backgroundColor: this.buttonColor ? this.buttonColor : undefined
       }
     },
 

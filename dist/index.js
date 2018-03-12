@@ -182,6 +182,12 @@ var px = function px(v) {
         return (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' ? value.checked || value.unchecked : typeof value === 'string';
       }
     },
+    buttonColor: {
+      type: [String, Object],
+      validator: function validator(value) {
+        return (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' ? value.checked || value.unchecked : typeof value === 'string';
+      }
+    },
     cssColors: {
       type: Boolean,
       default: false
@@ -232,7 +238,8 @@ var px = function px(v) {
         width: px(this.buttonRadius),
         height: px(this.buttonRadius),
         transition: 'transform ' + this.speed + 'ms',
-        transform: this.toggled ? 'translate3d(' + this.distance + ', 3px, 0px)' : null
+        transform: this.toggled ? 'translate3d(' + this.distance + ', 3px, 0px)' : null,
+        backgroundColor: this.buttonColor ? this.buttonColor : undefined
       };
     },
     labelStyle: function labelStyle() {
@@ -458,7 +465,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "change": function($event) {
         $event.stopPropagation();
-        _vm.toggle($event)
+        return _vm.toggle($event)
       }
     }
   }), _vm._v(" "), _c('div', {
