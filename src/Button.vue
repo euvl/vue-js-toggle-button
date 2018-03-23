@@ -267,6 +267,8 @@ $margin: 3px;
       vertical-align: sub;
       border-radius: 40%;
       line-height: 2em;
+      white-space: nowrap;
+      word-wrap: none;
     }
   }
 
