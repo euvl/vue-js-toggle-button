@@ -137,6 +137,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+//
+//
 
 var constants = {
   colorChecked: '#75C791',
@@ -144,6 +146,7 @@ var constants = {
   cssColors: false,
   labelChecked: 'on',
   labelUnchecked: 'off',
+  labelButton: '',
   width: 50,
   height: 22,
   margin: 3
@@ -190,7 +193,7 @@ var px = function px(v) {
       type: [Boolean, Object],
       default: false,
       validator: function validator(value) {
-        return (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' ? value.checked || value.unchecked : typeof value === 'boolean';
+        return (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' ? value.checked || value.unchecked || value.button : typeof value === 'boolean';
       }
     },
     height: {
@@ -225,11 +228,13 @@ var px = function px(v) {
       return this.height - constants.margin * 2;
     },
     distance: function distance() {
-      return px(this.width - this.height + constants.margin);
+      var buttonLabelWidth = this.labels.button ? this.labels.button.length * 3 : 0;
+      return px(this.width + constants.margin - (this.height + buttonLabelWidth));
     },
     buttonStyle: function buttonStyle() {
+      var buttonLabelWidth = this.labels.button ? this.labels.button.length * 3 : 0;
       return {
-        width: px(this.buttonRadius),
+        width: px(this.buttonRadius + buttonLabelWidth),
         height: px(this.buttonRadius),
         transition: 'transform ' + this.speed + 'ms',
         transform: this.toggled ? 'translate3d(' + this.distance + ', 3px, 0px)' : null
@@ -258,6 +263,9 @@ var px = function px(v) {
     },
     colorCurrent: function colorCurrent() {
       return this.toggled ? this.colorChecked : this.colorUnchecked;
+    },
+    labelButton: function labelButton() {
+      return contains(this.labels, 'button') ? this.labels.button : constants.labelButton;
     },
     labelChecked: function labelChecked() {
       return contains(this.labels, 'checked') ? this.labels.checked : constants.labelChecked;
@@ -321,7 +329,7 @@ exports = module.exports = __webpack_require__(5)();
 
 
 // module
-exports.push([module.i, ".vue-js-switch[data-v-25adc6c0]{display:inline-block;position:relative;overflow:hidden;vertical-align:middle;user-select:none;font-size:10px;cursor:pointer}.vue-js-switch .v-switch-input[data-v-25adc6c0]{display:none}.vue-js-switch .v-switch-label[data-v-25adc6c0]{position:absolute;top:0;font-weight:600;color:#fff}.vue-js-switch .v-switch-label.v-left[data-v-25adc6c0]{left:10px}.vue-js-switch .v-switch-label.v-right[data-v-25adc6c0]{right:10px}.vue-js-switch .v-switch-core[data-v-25adc6c0]{display:block;position:relative;box-sizing:border-box;outline:0;margin:0;transition:border-color .3s,background-color .3s;user-select:none}.vue-js-switch .v-switch-core .v-switch-button[data-v-25adc6c0]{display:block;position:absolute;overflow:hidden;top:0;left:0;transform:translate3d(3px,3px,0);border-radius:100%;background-color:#fff}.vue-js-switch.disabled[data-v-25adc6c0]{pointer-events:none;opacity:.6}", ""]);
+exports.push([module.i, ".vue-js-switch[data-v-25adc6c0]{display:inline-block;position:relative;overflow:hidden;vertical-align:middle;user-select:none;font-size:10px;cursor:pointer}.vue-js-switch .v-switch-input[data-v-25adc6c0]{display:none}.vue-js-switch .v-switch-label[data-v-25adc6c0]{position:absolute;top:0;font-weight:600;color:#fff}.vue-js-switch .v-switch-label.v-left[data-v-25adc6c0]{left:10px}.vue-js-switch .v-switch-label.v-right[data-v-25adc6c0]{right:10px}.vue-js-switch .v-switch-core[data-v-25adc6c0]{display:block;position:relative;box-sizing:border-box;outline:0;margin:0;transition:border-color .3s,background-color .3s;user-select:none}.vue-js-switch .v-switch-core .v-switch-button[data-v-25adc6c0]{display:block;position:absolute;top:0;left:0;transform:translate3d(3px,3px,0);border-radius:100%;background-color:#fff}.vue-js-switch .v-switch-core .v-switch-button-text[data-v-25adc6c0]{vertical-align:sub;border-radius:40%;line-height:2em}.vue-js-switch.disabled[data-v-25adc6c0]{pointer-events:none;opacity:.6}", ""]);
 
 // exports
 
@@ -458,7 +466,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "change": function($event) {
         $event.stopPropagation();
-        _vm.toggle($event)
+        return _vm.toggle($event)
       }
     }
   }), _vm._v(" "), _c('div', {
@@ -466,7 +474,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     style: (_vm.coreStyle)
   }, [_c('div', {
     staticClass: "v-switch-button",
-    style: (_vm.buttonStyle)
+    class: {
+      'v-switch-button-text': _vm.labelButton !== ''
+    },
+    style: (_vm.buttonStyle),
+    domProps: {
+      "innerHTML": _vm._s(_vm.labelButton)
+    }
   })]), _vm._v(" "), (_vm.labels) ? [(_vm.toggled) ? _c('span', {
     staticClass: "v-switch-label v-left",
     style: (_vm.labelStyle),

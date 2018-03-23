@@ -8,7 +8,9 @@
   <div class="v-switch-core"
         :style="coreStyle">
     <div class="v-switch-button"
-        :style="buttonStyle"/>
+        :class="{'v-switch-button-text': labelButton !== '' }"
+        :style="buttonStyle"
+        v-html="labelButton"/>
   </div>
   <template v-if="labels">
     <span class="v-switch-label v-left"
@@ -30,6 +32,7 @@ const constants = {
   cssColors: false,
   labelChecked: 'on',
   labelUnchecked: 'off',
+  labelButton:'',
   width: 50,
   height: 22,
   margin: 3
@@ -77,7 +80,7 @@ export default {
       default: false,
       validator (value) {
         return typeof value === 'object'
-          ? (value.checked || value.unchecked)
+          ? (value.checked || value.unchecked || value.button)
           : typeof value === 'boolean'
       }
     },
@@ -115,12 +118,14 @@ export default {
     },
 
     distance () {
-      return px(this.width - this.height + constants.margin)
+      const buttonLabelWidth = this.labels.button ? this.labels.button.length * 3 : 0;
+      return px(this.width + constants.margin - ( this.height + buttonLabelWidth) )
     },
 
     buttonStyle () {
+      const buttonLabelWidth = this.labels.button ? this.labels.button.length * 3 : 0;
       return {
-        width: px(this.buttonRadius),
+        width: px(this.buttonRadius + buttonLabelWidth),
         height: px(this.buttonRadius),
         transition: `transform ${this.speed}ms`,
         transform: this.toggled
@@ -161,6 +166,12 @@ export default {
         : this.colorUnchecked
     },
 
+    labelButton () {
+      return contains(this.labels, 'button')
+        ? this.labels.button
+        : constants.labelButton
+    },
+    
     labelChecked () {
       return contains(this.labels, 'checked')
         ? this.labels.checked
@@ -243,7 +254,6 @@ $margin: 3px;
     .v-switch-button {
       display: block;
       position: absolute;
-      overflow: hidden;
 
       top: 0;
       left: 0;
@@ -251,6 +261,12 @@ $margin: 3px;
       transform: translate3d($margin, $margin, 0);
       border-radius: 100%;
       background-color: #fff;
+      
+    }
+    .v-switch-button-text{
+      vertical-align: sub;
+      border-radius: 40%;
+      line-height: 2em;
     }
   }
 
