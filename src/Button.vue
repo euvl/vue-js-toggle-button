@@ -8,6 +8,7 @@
   <div class="v-switch-core"
         :style="coreStyle">
     <div class="v-switch-button"
+        :id="'v-switch-button-'+_uid"
         :class="{'v-switch-button-text': labelButton !== '' }"
         :style="buttonStyle"
         v-html="labelButton"/>
@@ -118,14 +119,13 @@ export default {
     },
 
     distance () {
-      const buttonLabelWidth = this.labels.button ? this.labels.button.length * 3 : 0;
-      return px(this.width + constants.margin - ( this.height + buttonLabelWidth) )
+      const actualButtonWidth = document.getElementById('v-switch-button-'+this._uid) ? document.getElementById('v-switch-button-'+this._uid).offsetWidth : this.buttonRadius;
+      return `calc(${this.width}px - ${constants.margin}px - ${actualButtonWidth}px )`
     },
 
     buttonStyle () {
-      const buttonLabelWidth = this.labels.button ? this.labels.button.length * 3 : 0;
       return {
-        width: px(this.buttonRadius + buttonLabelWidth),
+        minWidth: px(this.buttonRadius),
         height: px(this.buttonRadius),
         transition: `transform ${this.speed}ms`,
         transform: this.toggled
@@ -264,11 +264,10 @@ $margin: 3px;
       
     }
     .v-switch-button-text{
-      vertical-align: sub;
       border-radius: 40%;
-      line-height: 2em;
       white-space: nowrap;
-      word-wrap: none;
+      line-height: 2rem;
+      line-height: -moz-block-height;
     }
   }
 

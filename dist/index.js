@@ -139,6 +139,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+//
 
 var constants = {
   colorChecked: '#75C791',
@@ -228,13 +229,13 @@ var px = function px(v) {
       return this.height - constants.margin * 2;
     },
     distance: function distance() {
-      var buttonLabelWidth = this.labels.button ? this.labels.button.length * 3 : 0;
-      return px(this.width + constants.margin - (this.height + buttonLabelWidth));
+      var actualButtonWidth = document.getElementById('v-switch-button-' + this._uid) ? document.getElementById('v-switch-button-' + this._uid).offsetWidth : this.buttonRadius;
+      //TODO get width of the button
+      return 'calc(' + this.width + 'px - ' + constants.margin + 'px - ' + actualButtonWidth + 'px )';
     },
     buttonStyle: function buttonStyle() {
-      var buttonLabelWidth = this.labels.button ? this.labels.button.length * 3 : 0;
       return {
-        width: px(this.buttonRadius + buttonLabelWidth),
+        minWidth: px(this.buttonRadius),
         height: px(this.buttonRadius),
         transition: 'transform ' + this.speed + 'ms',
         transform: this.toggled ? 'translate3d(' + this.distance + ', 3px, 0px)' : null
@@ -329,7 +330,7 @@ exports = module.exports = __webpack_require__(5)();
 
 
 // module
-exports.push([module.i, ".vue-js-switch[data-v-25adc6c0]{display:inline-block;position:relative;overflow:hidden;vertical-align:middle;user-select:none;font-size:10px;cursor:pointer}.vue-js-switch .v-switch-input[data-v-25adc6c0]{display:none}.vue-js-switch .v-switch-label[data-v-25adc6c0]{position:absolute;top:0;font-weight:600;color:#fff}.vue-js-switch .v-switch-label.v-left[data-v-25adc6c0]{left:10px}.vue-js-switch .v-switch-label.v-right[data-v-25adc6c0]{right:10px}.vue-js-switch .v-switch-core[data-v-25adc6c0]{display:block;position:relative;box-sizing:border-box;outline:0;margin:0;transition:border-color .3s,background-color .3s;user-select:none}.vue-js-switch .v-switch-core .v-switch-button[data-v-25adc6c0]{display:block;position:absolute;top:0;left:0;transform:translate3d(3px,3px,0);border-radius:100%;background-color:#fff}.vue-js-switch .v-switch-core .v-switch-button-text[data-v-25adc6c0]{vertical-align:sub;border-radius:40%;line-height:2em;white-space:nowrap;word-wrap:none}.vue-js-switch.disabled[data-v-25adc6c0]{pointer-events:none;opacity:.6}", ""]);
+exports.push([module.i, ".vue-js-switch[data-v-25adc6c0]{display:inline-block;position:relative;overflow:hidden;vertical-align:middle;user-select:none;font-size:10px;cursor:pointer}.vue-js-switch .v-switch-input[data-v-25adc6c0]{display:none}.vue-js-switch .v-switch-label[data-v-25adc6c0]{position:absolute;top:0;font-weight:600;color:#fff}.vue-js-switch .v-switch-label.v-left[data-v-25adc6c0]{left:10px}.vue-js-switch .v-switch-label.v-right[data-v-25adc6c0]{right:10px}.vue-js-switch .v-switch-core[data-v-25adc6c0]{display:block;position:relative;box-sizing:border-box;outline:0;margin:0;transition:border-color .3s,background-color .3s;user-select:none}.vue-js-switch .v-switch-core .v-switch-button[data-v-25adc6c0]{display:block;position:absolute;top:0;left:0;transform:translate3d(3px,3px,0);border-radius:100%;background-color:#fff}.vue-js-switch .v-switch-core .v-switch-button-text[data-v-25adc6c0]{border-radius:40%;white-space:nowrap;line-height:2rem;line-height:-moz-block-height}.vue-js-switch.disabled[data-v-25adc6c0]{pointer-events:none;opacity:.6}", ""]);
 
 // exports
 
@@ -478,6 +479,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       'v-switch-button-text': _vm.labelButton !== ''
     },
     style: (_vm.buttonStyle),
+    attrs: {
+      "id": 'v-switch-button-' + _vm._uid
+    },
     domProps: {
       "innerHTML": _vm._s(_vm.labelButton)
     }
