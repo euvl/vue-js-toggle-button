@@ -54,7 +54,7 @@
           :height="40"
           :speed="480"
           :color="{checked: '#BE3D62', unchecked: '#FF877B'}"
-          :labels="{button: '00000'}"/>
+          :labels="{button: 'label name'}"/>
           {{silent}}
       </div>
       <div style="padding-top: 20px;">
@@ -65,7 +65,7 @@
           :height="40"
           :speed="480"
           :color="{checked: '#BE3D62', unchecked: '#FF877B'}"
-          :labels="{button: '0', checked: '', unchecked: ''}"/>
+          :labels="{button: 'stripped', checked: '', unchecked: ''}"/>
           {{silentNoLabels}}
       </div>
     </div>

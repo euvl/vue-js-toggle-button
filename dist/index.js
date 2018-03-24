@@ -230,7 +230,6 @@ var px = function px(v) {
     },
     distance: function distance() {
       var actualButtonWidth = document.getElementById('v-switch-button-' + this._uid) ? document.getElementById('v-switch-button-' + this._uid).offsetWidth : this.buttonRadius;
-      //TODO get width of the button
       return 'calc(' + this.width + 'px - ' + constants.margin + 'px - ' + actualButtonWidth + 'px )';
     },
     buttonStyle: function buttonStyle() {
