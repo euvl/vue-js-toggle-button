@@ -147,7 +147,7 @@ var constants = {
   width: 50,
   height: 22,
   margin: 3,
-  buttonColor: '#fff'
+  buttonBackground: '#fff'
 };
 
 var contains = function contains(object, title) {
@@ -183,7 +183,7 @@ var px = function px(v) {
         return (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' ? value.checked || value.unchecked : typeof value === 'string';
       }
     },
-    buttonColor: {
+    buttonBackground: {
       type: [String, Object],
       validator: function validator(value) {
         return (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' ? value.checked || value.unchecked : typeof value === 'string';
@@ -240,7 +240,7 @@ var px = function px(v) {
         height: px(this.buttonRadius),
         transition: 'transform ' + this.speed + 'ms',
         transform: this.toggled ? 'translate3d(' + this.distance + ', 3px, 0px)' : null,
-        backgroundColor: this.buttonColor ? this.buttonColorCurrent : undefined
+        background: this.buttonBackground ? this.buttonBackgroundCurrent : undefined
       };
     },
     labelStyle: function labelStyle() {
@@ -273,27 +273,27 @@ var px = function px(v) {
     labelUnchecked: function labelUnchecked() {
       return contains(this.labels, 'unchecked') ? this.labels.unchecked : constants.labelUnchecked;
     },
-    buttonColorChecked: function buttonColorChecked() {
-      var buttonColor = this.buttonColor;
+    buttonBackgroundChecked: function buttonBackgroundChecked() {
+      var buttonBackground = this.buttonBackground;
 
 
-      return contains(buttonColor, 'checked') ? buttonColor.checked : constants.buttonColor;
+      return contains(buttonBackground, 'checked') ? buttonBackground.checked : constants.buttonBackground;
     },
-    buttonColorUnchecked: function buttonColorUnchecked() {
-      var buttonColor = this.buttonColor;
+    buttonBackgroundUnchecked: function buttonBackgroundUnchecked() {
+      var buttonBackground = this.buttonBackground;
 
 
-      return contains(buttonColor, 'unchecked') ? buttonColor.unchecked : constants.buttonColor;
+      return contains(buttonBackground, 'unchecked') ? buttonBackground.unchecked : constants.buttonBackground;
     },
-    buttonColorCurrent: function buttonColorCurrent() {
-      var buttonColor = this.buttonColor;
+    buttonBackgroundCurrent: function buttonBackgroundCurrent() {
+      var buttonBackground = this.buttonBackground;
 
 
-      if ((typeof buttonColor === 'undefined' ? 'undefined' : _typeof(buttonColor)) !== 'object') {
-        return buttonColor || constants.buttonColor;
+      if ((typeof buttonBackground === 'undefined' ? 'undefined' : _typeof(buttonBackground)) !== 'object') {
+        return buttonBackground || constants.buttonBackground;
       }
 
-      return this.toggled ? this.buttonColorChecked : this.buttonColorUnchecked;
+      return this.toggled ? this.buttonBackgroundChecked : this.buttonBackgroundUnchecked;
     }
   },
   watch: {

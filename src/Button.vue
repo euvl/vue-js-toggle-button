@@ -33,7 +33,7 @@ const constants = {
   width: 50,
   height: 22,
   margin: 3,
-  buttonColor: '#fff'
+  buttonBackground: '#fff'
 }
 
 const contains = (object, title) => {
@@ -69,7 +69,7 @@ export default {
           : typeof value === 'string'
       }
     },
-    buttonColor: {
+    buttonBackground: {
       type: [String, Object],
       validator (value) {
         return typeof value === 'object'
@@ -135,7 +135,7 @@ export default {
         transform: this.toggled
           ? `translate3d(${this.distance}, 3px, 0px)`
           : null,
-        backgroundColor: this.buttonColor ? this.buttonColorCurrent : undefined
+        background: this.buttonBackground ? this.buttonBackgroundCurrent : undefined
       }
     },
 
@@ -183,32 +183,32 @@ export default {
         : constants.labelUnchecked
     },
 
-    buttonColorChecked () {
-      let { buttonColor } = this
+    buttonBackgroundChecked () {
+      let { buttonBackground } = this
 
-      return contains(buttonColor, 'checked')
-        ? buttonColor.checked
-        : constants.buttonColor
+      return contains(buttonBackground, 'checked')
+        ? buttonBackground.checked
+        : constants.buttonBackground
     },
 
-    buttonColorUnchecked () {
-      let { buttonColor } = this
+    buttonBackgroundUnchecked () {
+      let { buttonBackground } = this
 
-      return contains(buttonColor, 'unchecked')
-        ? buttonColor.unchecked
-        : constants.buttonColor
+      return contains(buttonBackground, 'unchecked')
+        ? buttonBackground.unchecked
+        : constants.buttonBackground
     },
 
-    buttonColorCurrent () {
-      let { buttonColor } = this
+    buttonBackgroundCurrent () {
+      let { buttonBackground } = this
 
-      if (typeof buttonColor !== 'object') {
-        return buttonColor || constants.buttonColor
+      if (typeof buttonBackground !== 'object') {
+        return buttonBackground || constants.buttonBackground
       }
 
       return this.toggled
-        ? this.buttonColorChecked
-        : this.buttonColorUnchecked
+        ? this.buttonBackgroundChecked
+        : this.buttonBackgroundUnchecked
     }
 
   },
