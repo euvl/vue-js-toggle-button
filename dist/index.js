@@ -146,7 +146,8 @@ var constants = {
   labelUnchecked: 'off',
   width: 50,
   height: 22,
-  margin: 3
+  margin: 3,
+  buttonColor: '#fff'
 };
 
 var contains = function contains(object, title) {
@@ -239,7 +240,7 @@ var px = function px(v) {
         height: px(this.buttonRadius),
         transition: 'transform ' + this.speed + 'ms',
         transform: this.toggled ? 'translate3d(' + this.distance + ', 3px, 0px)' : null,
-        backgroundColor: this.buttonColor ? this.buttonColor : undefined
+        backgroundColor: this.buttonColor ? this.buttonColorCurrent : undefined
       };
     },
     labelStyle: function labelStyle() {
@@ -271,6 +272,28 @@ var px = function px(v) {
     },
     labelUnchecked: function labelUnchecked() {
       return contains(this.labels, 'unchecked') ? this.labels.unchecked : constants.labelUnchecked;
+    },
+    buttonColorChecked: function buttonColorChecked() {
+      var buttonColor = this.buttonColor;
+
+
+      return contains(buttonColor, 'checked') ? buttonColor.checked : constants.buttonColor;
+    },
+    buttonColorUnchecked: function buttonColorUnchecked() {
+      var buttonColor = this.buttonColor;
+
+
+      return contains(buttonColor, 'unchecked') ? buttonColor.unchecked : constants.buttonColor;
+    },
+    buttonColorCurrent: function buttonColorCurrent() {
+      var buttonColor = this.buttonColor;
+
+
+      if ((typeof buttonColor === 'undefined' ? 'undefined' : _typeof(buttonColor)) !== 'object') {
+        return buttonColor || constants.buttonColor;
+      }
+
+      return this.toggled ? this.buttonColorChecked : this.buttonColorUnchecked;
     }
   },
   watch: {

@@ -32,7 +32,8 @@ const constants = {
   labelUnchecked: 'off',
   width: 50,
   height: 22,
-  margin: 3
+  margin: 3,
+  buttonColor: '#fff'
 }
 
 const contains = (object, title) => {
@@ -134,7 +135,7 @@ export default {
         transform: this.toggled
           ? `translate3d(${this.distance}, 3px, 0px)`
           : null,
-        backgroundColor: this.buttonColor ? this.buttonColor : undefined
+        backgroundColor: this.buttonColor ? this.buttonColorCurrent : undefined
       }
     },
 
@@ -180,7 +181,36 @@ export default {
       return contains(this.labels, 'unchecked')
         ? this.labels.unchecked
         : constants.labelUnchecked
+    },
+
+    buttonColorChecked () {
+      let { buttonColor } = this
+
+      return contains(buttonColor, 'checked')
+        ? buttonColor.checked
+        : constants.buttonColor
+    },
+
+    buttonColorUnchecked () {
+      let { buttonColor } = this
+
+      return contains(buttonColor, 'unchecked')
+        ? buttonColor.unchecked
+        : constants.buttonColor
+    },
+
+    buttonColorCurrent () {
+      let { buttonColor } = this
+
+      if (typeof buttonColor !== 'object') {
+        return buttonColor || constants.buttonColor
+      }
+
+      return this.toggled
+        ? this.buttonColorChecked
+        : this.buttonColorUnchecked
     }
+
   },
   watch: {
     value (value) {
