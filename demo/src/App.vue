@@ -39,7 +39,7 @@
           :labels="{checked: 'Button', unchecked: 'Collor'}"
           :color="{checked: '#7DCE94', unchecked: '#82C7EB'}"
           :width="80"
-          :buttonBackground="{checked: 'linear-gradient(red, yellow)', unchecked: '#F2C00B'}"/>
+          :switchColor="{checked: 'linear-gradient(red, yellow)', unchecked: '#F2C00B'}"/>
       </div>
       <div style="padding-top: 20px;">
         <toggle-button
