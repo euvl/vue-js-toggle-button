@@ -30,11 +30,17 @@
 
         <toggle-button
           :value="false"
-          :width="110"
-          :color="{unchecked: '#FF6699'}"
-          :labels="{unchecked: 'Disabled button'}"
+          :width="80"
+          :labels="{unchecked: 'Disabled'}"
           :disabled="true"/>
-        
+
+        <toggle-button
+          :value="false"
+          :width="140"
+          :color="{disabled: '#FF6699'}"
+          :labels="{unchecked: 'Custom disabled color'}"
+          :disabled="true"/>
+
         <toggle-button :value="true"
           :labels="{checked: 'Button', unchecked: 'Collor'}"
           :color="{checked: '#7DCE94', unchecked: '#82C7EB'}"

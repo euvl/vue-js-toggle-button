@@ -114,7 +114,9 @@ export default {
       return {
         width: px(this.width),
         height: px(this.height),
-        backgroundColor: this.cssColors ? null : this.colorCurrent,
+        backgroundColor: this.cssColors
+          ? null
+          : (this.disabled ? this.colorDisabled : this.colorCurrent),
         borderRadius: px(Math.round(this.height / 2))
       }
     },
@@ -163,6 +165,14 @@ export default {
       return contains(color, 'unchecked')
         ? color.unchecked
         : constants.colorUnchecked
+    },
+
+    colorDisabled () {
+      let { color } = this
+
+      return contains(color, 'disabled')
+        ? color.disabled
+        : this.colorCurrent
     },
 
     colorCurrent () {
