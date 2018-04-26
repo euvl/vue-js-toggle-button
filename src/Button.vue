@@ -32,7 +32,8 @@ const constants = {
   labelUnchecked: 'off',
   width: 50,
   height: 22,
-  margin: 3
+  margin: 3,
+  switchColor: '#fff'
 }
 
 const contains = (object, title) => {
@@ -61,6 +62,14 @@ export default {
       default: 300
     },
     color: {
+      type: [String, Object],
+      validator (value) {
+        return typeof value === 'object'
+          ? (value.checked || value.unchecked)
+          : typeof value === 'string'
+      }
+    },
+    switchColor: {
       type: [String, Object],
       validator (value) {
         return typeof value === 'object'
@@ -125,7 +134,8 @@ export default {
         transition: `transform ${this.speed}ms`,
         transform: this.toggled
           ? `translate3d(${this.distance}, 3px, 0px)`
-          : null
+          : null,
+        background: this.switchColor ? this.switchColorCurrent : undefined
       }
     },
 
@@ -171,7 +181,36 @@ export default {
       return contains(this.labels, 'unchecked')
         ? this.labels.unchecked
         : constants.labelUnchecked
+    },
+
+    switchColorChecked () {
+      let { switchColor } = this
+
+      return contains(switchColor, 'checked')
+        ? switchColor.checked
+        : constants.switchColor
+    },
+
+    switchColorUnchecked () {
+      let { switchColor } = this
+
+      return contains(switchColor, 'unchecked')
+        ? switchColor.unchecked
+        : constants.switchColor
+    },
+
+    switchColorCurrent () {
+      let { switchColor } = this
+
+      if (typeof switchColor !== 'object') {
+        return switchColor || constants.switchColor
+      }
+
+      return this.toggled
+        ? this.switchColorChecked
+        : this.switchColorUnchecked
     }
+
   },
   watch: {
     value (value) {

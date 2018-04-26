@@ -48,6 +48,7 @@ Use:
 | color     | [String, Object]  | `#75C791`  | If `String` - color of the button when checked <br>If `Object` - colors for the button when checked/uncheked <br>Example: `{checked: '#00FF00', unchecked: '#FF0000'}`  |
 | cssColors | Boolean           | false      | If `true` - deactivates the setting of colors through inline styles in favor of using CSS styling |
 | labels    | [Boolean, Object] | false      | If `Boolean` - shows/hides default labels ("on" and "off") <br>If `Object` - sets custom labels for both states. <br>Example: `{checked: 'Foo', unchecked: 'Bar'}`   |
+| switchColor     | [String, Object]            | `#BFCBD9`         | If `String` - color or background property of the switch when checked <br>If `Object` - colors or background property for the switch when checked/uncheked <br>Example: `{checked: '#25EF02', unchecked: 'linear-gradient(red, yellow)'}`   |
 | width     | Number            | 50         | Width of the button, default is 50 |
 | height    | Number            | 22         | Height of the button, default is 22 |
 

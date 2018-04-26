@@ -146,7 +146,8 @@ var constants = {
   labelUnchecked: 'off',
   width: 50,
   height: 22,
-  margin: 3
+  margin: 3,
+  switchColor: '#fff'
 };
 
 var contains = function contains(object, title) {
@@ -177,6 +178,12 @@ var px = function px(v) {
       default: 300
     },
     color: {
+      type: [String, Object],
+      validator: function validator(value) {
+        return (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' ? value.checked || value.unchecked : typeof value === 'string';
+      }
+    },
+    switchColor: {
       type: [String, Object],
       validator: function validator(value) {
         return (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' ? value.checked || value.unchecked : typeof value === 'string';
@@ -232,7 +239,8 @@ var px = function px(v) {
         width: px(this.buttonRadius),
         height: px(this.buttonRadius),
         transition: 'transform ' + this.speed + 'ms',
-        transform: this.toggled ? 'translate3d(' + this.distance + ', 3px, 0px)' : null
+        transform: this.toggled ? 'translate3d(' + this.distance + ', 3px, 0px)' : null,
+        background: this.switchColor ? this.switchColorCurrent : undefined
       };
     },
     labelStyle: function labelStyle() {
@@ -264,6 +272,28 @@ var px = function px(v) {
     },
     labelUnchecked: function labelUnchecked() {
       return contains(this.labels, 'unchecked') ? this.labels.unchecked : constants.labelUnchecked;
+    },
+    switchColorChecked: function switchColorChecked() {
+      var switchColor = this.switchColor;
+
+
+      return contains(switchColor, 'checked') ? switchColor.checked : constants.switchColor;
+    },
+    switchColorUnchecked: function switchColorUnchecked() {
+      var switchColor = this.switchColor;
+
+
+      return contains(switchColor, 'unchecked') ? switchColor.unchecked : constants.switchColor;
+    },
+    switchColorCurrent: function switchColorCurrent() {
+      var switchColor = this.switchColor;
+
+
+      if ((typeof switchColor === 'undefined' ? 'undefined' : _typeof(switchColor)) !== 'object') {
+        return switchColor || constants.switchColor;
+      }
+
+      return this.toggled ? this.switchColorChecked : this.switchColorUnchecked;
     }
   },
   watch: {
@@ -458,7 +488,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "change": function($event) {
         $event.stopPropagation();
-        _vm.toggle($event)
+        return _vm.toggle($event)
       }
     }
   }), _vm._v(" "), _c('div', {
