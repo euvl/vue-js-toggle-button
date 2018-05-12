@@ -17,7 +17,7 @@ Install:
 ```bash
 npm install vue-js-toggle-button --save
 ```
-Import:
+Import Plugin:
 ```javascript
 import ToggleButton from 'vue-js-toggle-button'
 Vue.use(ToggleButton)
@@ -35,6 +35,11 @@ Use:
 
 <toggle-button :value="true" 
                :labels="{checked: 'Foo', unchecked: 'Bar'}"/>
+```
+
+If you prefer not to use the plugin you can also import the component directly:
+```javascript
+import ToggleButton from 'vue-js-toggle-button/src/Button'
 ```
 
 ### Properties
