@@ -17,6 +17,11 @@ Install:
 ```bash
 npm install vue-js-toggle-button --save
 ```
+If using `vue-cli`, add the SASS loader:
+```bash
+npm install sass-loader node-sass --save-dev
+```
+
 Import Plugin:
 ```javascript
 import ToggleButton from 'vue-js-toggle-button'
