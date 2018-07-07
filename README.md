@@ -52,7 +52,7 @@ import ToggleButton from 'vue-js-toggle-button/src/Button'
 | Name      | Type              | Default     | Description                        |
 | ---       | ---               | ---         | ---                                |
 | value     | Boolean           | false       | Initial state of the toggle button |
-| sync      | Boolean           | false       | If set to `true`, will be watching changes in `value` property and overwrite the current state of the button whenever `value` prop. changes |
+| sync      | Boolean           | false       | If set to `true`, will be watching changes in `value` property and overwrite the current state of the button whenever `value` prop changes |
 | speed     | Number            | 300        | Transition time for the animation   |
 | disabled  | Boolean           | false      | Button does not react on mouse events |
 | color     | [String, Object]  | `#75C791`  | If `String` - color of the button when checked <br>If `Object` - colors for the button when checked/uncheked <br>Example: `{checked: '#00FF00', unchecked: '#FF0000'}`  |
