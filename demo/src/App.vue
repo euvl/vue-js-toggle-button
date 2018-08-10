@@ -12,6 +12,7 @@
         <toggle-button :labels="true" color="#82C7EB"/>
 
         <toggle-button :value="true"
+          name="phone"
           :labels="{checked: 'Android', unchecked: 'iPhone'}"
           :color="{checked: '#7DCE94', unchecked: '#82C7EB'}"
           :width="80"/>
@@ -34,7 +35,7 @@
           :color="{unchecked: '#FF6699'}"
           :labels="{unchecked: 'Disabled button'}"
           :disabled="true"/>
-        
+
         <toggle-button :value="true"
           :labels="{checked: 'Button', unchecked: 'Collor'}"
           :color="{checked: '#7DCE94', unchecked: '#82C7EB'}"
