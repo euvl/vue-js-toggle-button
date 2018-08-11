@@ -53,11 +53,33 @@
           :labels="{checked: 'HODOOOR!!!', unchecked: 'Hold the door?'}"/>
           {{hodor}}
       </div>
+      <div style="padding-top: 20px;">
+        <toggle-button
+          id="changed-font"
+          v-model="silent"
+          :width="220"
+          :height="40"
+          :speed="480"
+          :color="{checked: '#BE3D62', unchecked: '#FF877B'}"
+          :labels="{button: 'label name'}"/>
+          {{silent}}
+      </div>
+      <div style="padding-top: 20px;">
+        <toggle-button
+          id="changed-font"
+          v-model="silentNoLabels"
+          :width="220"
+          :height="40"
+          :speed="480"
+          :color="{checked: '#BE3D62', unchecked: '#FF877B'}"
+          :labels="{button: 'stripped', checked: '', unchecked: ''}"/>
+          {{silentNoLabels}}
+      </div>
     </div>
     <div class="padding">
       <h2>And be programatically set/reset</h2>
       <div>
-        <span v-for="(item, i) in items" style="padding: 5px">
+        <span v-for="(item, i) in items" :key="i" style="padding: 5px">
           <toggle-button
             :value="item.value"
             :color="item.color"
@@ -84,7 +106,9 @@ export default {
         {color: '#79BD8F', value: false},
         {color: '#00A388', value: false}
       ],
-      hodor: false
+      hodor: false,
+      silent: false,
+      silentNoLabels: false
     }
   },
   mounted () {
