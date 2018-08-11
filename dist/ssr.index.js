@@ -137,6 +137,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+//
 
 var constants = {
   colorChecked: '#75C791',
@@ -168,6 +169,9 @@ var px = function px(v) {
     disabled: {
       type: Boolean,
       default: false
+    },
+    name: {
+      type: String
     },
     sync: {
       type: Boolean,
@@ -489,7 +493,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('input', {
     staticClass: "v-switch-input",
     attrs: {
-      "type": "checkbox"
+      "type": "checkbox",
+      "name": _vm.name
     },
     on: {
       "change": function($event) {

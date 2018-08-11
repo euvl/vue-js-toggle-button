@@ -5,10 +5,8 @@
   "author": "euvl <yev.vlasenko@gmail.com>",
   "private": false,
   "scripts": {
-    "build:client":
-      "webpack --config ./webpack.config.js --progress --hide-modules",
-    "build:ssr":
-      "webpack --config ./webpack.ssr.config.js  --progress --hide-modules",
+    "build:client": "webpack --config ./webpack.config.js --progress --hide-modules",
+    "build:ssr": "webpack --config ./webpack.ssr.config.js  --progress --hide-modules",
     "build": "npm run build:client && npm run build:ssr"
   },
   "main": "dist/index.js",
@@ -22,7 +20,12 @@
   "peerDependencies": {
     "vue": "^2.0.0"
   },
-  "keywords": ["vue", "toggle", "switch", "button"],
+  "keywords": [
+    "vue",
+    "toggle",
+    "switch",
+    "button"
+  ],
   "devDependencies": {
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",
