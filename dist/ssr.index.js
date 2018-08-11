@@ -224,7 +224,7 @@ var px = function px(v) {
       return {
         width: px(this.width),
         height: px(this.height),
-        backgroundColor: this.cssColors ? null : this.colorCurrent,
+        backgroundColor: this.cssColors ? null : this.disabled ? this.colorDisabled : this.colorCurrent,
         borderRadius: px(Math.round(this.height / 2))
       };
     },
@@ -263,6 +263,12 @@ var px = function px(v) {
 
 
       return contains(color, 'unchecked') ? color.unchecked : constants.colorUnchecked;
+    },
+    colorDisabled: function colorDisabled() {
+      var color = this.color;
+
+
+      return contains(color, 'disabled') ? color.disabled : this.colorCurrent;
     },
     colorCurrent: function colorCurrent() {
       return this.toggled ? this.colorChecked : this.colorUnchecked;
