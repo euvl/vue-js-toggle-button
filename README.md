@@ -61,7 +61,7 @@ import ToggleButton from 'vue-js-toggle-button/src/Button'
 | switchColor     | [String, Object]            | `#BFCBD9`         | If `String` - color or background property of the switch when checked <br>If `Object` - colors or background property for the switch when checked/uncheked <br>Example: `{checked: '#25EF02', unchecked: 'linear-gradient(red, yellow)'}`   |
 | width     | Number            | 50         | Width of the button, default is 50 |
 | height    | Number            | 22         | Height of the button, default is 22 |
-| name      | String            | false      | Name to attach to the generated input field |
+| name      | String            | undefined  | Name to attach to the generated input field |
 
 `labels` object accepts HTML text (for example, you can use FontAwesome for checked/unchecked states).
 
