@@ -4,7 +4,7 @@
 <a align="right" href="https://www.buymeacoffee.com/yev" target="_blank">
   <img width="200" alt="screen shot 2018-03-01 at 10 33 39" src="https://user-images.githubusercontent.com/1577802/36840220-21beb89c-1d3c-11e8-98a4-45fc334842cf.png">
 </a>
-  
+
 ### Vue.js 2 toggle / switch button - simple, pretty, customizable.
 
 ![Imgur](http://i.imgur.com/a2Hf7pm.png)
@@ -33,12 +33,12 @@ Use:
 
 <toggle-button v-model="myDataVariable"/>
 
-<toggle-button :value="false" 
-               color="#82C7EB" 
-               :sync="true" 
+<toggle-button :value="false"
+               color="#82C7EB"
+               :sync="true"
                :labels="true"/>
 
-<toggle-button :value="true" 
+<toggle-button :value="true"
                :labels="{checked: 'Foo', unchecked: 'Bar'}"/>
 ```
 
@@ -61,6 +61,7 @@ import ToggleButton from 'vue-js-toggle-button/src/Button'
 | switchColor     | [String, Object]            | `#BFCBD9`         | If `String` - color or background property of the switch when checked <br>If `Object` - colors or background property for the switch when checked/uncheked <br>Example: `{checked: '#25EF02', unchecked: 'linear-gradient(red, yellow)'}`   |
 | width     | Number            | 50         | Width of the button, default is 50 |
 | height    | Number            | 22         | Height of the button, default is 22 |
+| name      | String            | undefined  | Name to attach to the generated input field |
 
 `labels` object accepts HTML text (for example, you can use FontAwesome for checked/unchecked states).
 

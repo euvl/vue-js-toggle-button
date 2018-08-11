@@ -4,6 +4,7 @@
        :aria-checked="ariaChecked">
   <input type="checkbox"
          class="v-switch-input"
+         :name="name"
          @change.stop="toggle">
   <div class="v-switch-core"
         :style="coreStyle">
@@ -52,6 +53,9 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    name: {
+      type: String
     },
     sync: {
       type: Boolean,
