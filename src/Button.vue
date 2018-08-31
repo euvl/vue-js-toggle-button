@@ -5,6 +5,7 @@
   <input type="checkbox"
          class="v-switch-input"
          :name="name"
+         :checked="value"
          @change.stop="toggle">
   <div class="v-switch-core"
         :style="coreStyle">
