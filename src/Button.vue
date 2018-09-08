@@ -68,7 +68,7 @@ export default {
       type: [String, Object],
       validator (value) {
         return typeof value === 'object'
-          ? (value.checked || value.unchecked)
+          ? (value.checked || value.unchecked || value.disabled)
           : typeof value === 'string'
       }
     },
