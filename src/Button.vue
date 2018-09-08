@@ -109,10 +109,6 @@ export default {
       return ['vue-js-switch', { toggled, disabled }]
     },
 
-    ariaChecked () {
-      return this.toggled.toString()
-    },
-
     coreStyle () {
       return {
         width: px(this.width),
