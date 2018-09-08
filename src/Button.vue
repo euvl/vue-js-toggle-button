@@ -1,7 +1,5 @@
 <template>
-<label role="checkbox"
-       :class="className"
-       :aria-checked="ariaChecked">
+<label :class="className">
   <input type="checkbox"
          class="v-switch-input"
          :name="name"
@@ -265,7 +263,10 @@ $margin: 3px;
   cursor: pointer;
 
   .v-switch-input {
-    display: none;
+    opacity: 0;
+    position: absolute;
+    width: 1px;
+    height: 1px;
   }
 
   .v-switch-label {
