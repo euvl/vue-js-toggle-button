@@ -1,7 +1,5 @@
 <template>
-<label role="checkbox"
-       :class="className"
-       :aria-checked="ariaChecked">
+<label :class="className">
   <input type="checkbox"
          class="v-switch-input"
          :name="name"
@@ -70,7 +68,7 @@ export default {
       type: [String, Object],
       validator (value) {
         return typeof value === 'object'
-          ? (value.checked || value.unchecked)
+          ? (value.checked || value.unchecked || value.disabled)
           : typeof value === 'string'
       }
     },
@@ -109,10 +107,6 @@ export default {
       let { toggled, disabled } = this
 
       return ['vue-js-switch', { toggled, disabled }]
-    },
-
-    ariaChecked () {
-      return this.toggled.toString()
     },
 
     coreStyle () {
@@ -265,7 +259,10 @@ $margin: 3px;
   cursor: pointer;
 
   .v-switch-input {
-    display: none;
+    opacity: 0;
+    position: absolute;
+    width: 1px;
+    height: 1px;
   }
 
   .v-switch-label {
