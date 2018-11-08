@@ -44,7 +44,7 @@ Use:
 
 If you prefer not to use the plugin you can also import the component directly:
 ```javascript
-import ToggleButton from 'vue-js-toggle-button/src/Button'
+import ToggleButton from 'vue-js-toggle-button/src/Button.vue''
 ```
 
 ### Properties
