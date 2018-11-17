@@ -1,10 +1,12 @@
-import Vue from 'vue'
-import Button from './Button.vue'
+import ToggleButton from './Button.vue'
 
 const plugin = {
-  install(Vue, options) {
-  	Vue.component('ToggleButton', Button)
+  install(Vue) {
+  	Vue.component('ToggleButton', ToggleButton)
   }
 }
 
 export default plugin
+export {
+  ToggleButton
+}
