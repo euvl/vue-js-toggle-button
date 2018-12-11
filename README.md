@@ -2,16 +2,19 @@
   <img src="https://badge.fury.io/js/vue-js-toggle-button.svg">
 </span> <span>
   <img src="https://img.shields.io/npm/dm/vue-js-toggle-button.svg">
-</span> <span>
+</span> 
+
+# Vue.js toggle/switch button.
+
+<p align="right">
   <a href="https://www.buymeacoffee.com/yev" target="_blank">
     <img
          width="140"
          alt="Get a coffee"
          src="https://user-images.githubusercontent.com/1577802/36840220-21beb89c-1d3c-11e8-98a4-45fc334842cf.png">
   </a>
-</span>
+</p>
 
-# Vue.js toggle/switch button.
 <p align="center">
   <img src="http://i.imgur.com/a2Hf7pm.png">
 </p>
