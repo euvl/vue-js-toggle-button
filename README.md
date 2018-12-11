@@ -22,6 +22,7 @@ Import plugin:
 
 ```javascript
 import ToggleButton from 'vue-js-toggle-button'
+
 Vue.use(ToggleButton)
 ```
 **OR**
@@ -29,8 +30,9 @@ Vue.use(ToggleButton)
 Import component:
 
 ```javascript
-import { ToggleButton } from 'vue-js-toggle-button
-Vue.component('ToggleButton', ToggleButton);
+import { ToggleButton } from 'vue-js-toggle-button'
+
+Vue.component('ToggleButton', ToggleButton)
 ```
 
 Use:
