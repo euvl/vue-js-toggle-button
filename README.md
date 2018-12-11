@@ -5,7 +5,7 @@
   <img width="200" alt="screen shot 2018-03-01 at 10 33 39" src="https://user-images.githubusercontent.com/1577802/36840220-21beb89c-1d3c-11e8-98a4-45fc334842cf.png">
 </a>
 
-### Vue.js 2 toggle / switch button - simple, pretty, customizable.
+### Vue.js toggle/switch button.
 
 ![Imgur](http://i.imgur.com/a2Hf7pm.png)
 
@@ -13,10 +13,13 @@ Feel free to ask questions or propose features in the "Issues" section
 
 [Live demo here](http://vue-js-toggle-button.yev.io/)
 
-Install:
+### Install
+
 ```bash
 npm install vue-js-toggle-button --save
 ```
+
+### Import
 
 Import plugin:
 
@@ -35,7 +38,8 @@ import { ToggleButton } from 'vue-js-toggle-button'
 Vue.component('ToggleButton', ToggleButton)
 ```
 
-Use:
+### Use
+
 ```xml
 <toggle-button @change="onChangeEventHandler"/>
 
