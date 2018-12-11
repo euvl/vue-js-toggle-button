@@ -10,9 +10,10 @@
 </a>
 </p>
 
-### Vue.js toggle/switch button.
-
-![Imgur](http://i.imgur.com/a2Hf7pm.png)
+# Vue.js toggle/switch button.
+<p align="center">
+  <img src="http://i.imgur.com/a2Hf7pm.png">
+</p>
 
 [Live demo here](http://vue-js-toggle-button.yev.io/)
 
