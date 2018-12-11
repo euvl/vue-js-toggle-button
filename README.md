@@ -1,14 +1,17 @@
-[![npm version](https://badge.fury.io/js/vue-js-toggle-button.svg)](https://badge.fury.io/js/vue-js-toggle-button)
-[![npm](https://img.shields.io/npm/dm/vue-js-toggle-button.svg)](https://www.npmjs.com/package/vue-js-toggle-button)
+<a href="https://badge.fury.io/js/vue-js-toggle-button">
+  <img src="https://badge.fury.io/js/vue-js-toggle-button.svg">
+</a>
 
-<p align="right">
+<a href="https://www.npmjs.com/package/vue-js-toggle-button">
+  <img src="https://img.shields.io/npm/dm/vue-js-toggle-button.svg">
+</a>
+
 <a href="https://www.buymeacoffee.com/yev" target="_blank">
   <img
-       width="200"
+       width="140"
        alt="Get a coffee"
        src="https://user-images.githubusercontent.com/1577802/36840220-21beb89c-1d3c-11e8-98a4-45fc334842cf.png">
 </a>
-</p>
 
 # Vue.js toggle/switch button.
 <p align="center">
