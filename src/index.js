@@ -1,12 +1,18 @@
 import ToggleButton from './Button.vue'
 
-const plugin = {
+let installed = false
+
+export default {
   install(Vue) {
-  	Vue.component('ToggleButton', ToggleButton)
+    if (installed) {
+      return
+    }
+    
+    Vue.component('ToggleButton', ToggleButton)
+    installed = true
   }
 }
 
-export default plugin
 export {
   ToggleButton
 }

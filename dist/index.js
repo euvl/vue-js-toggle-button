@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("vue"));
+		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
-		define(["vue"], factory);
+		define([], factory);
 	else if(typeof exports === 'object')
-		exports["vue-js-toggle-button"] = factory(require("vue"));
+		exports["vue-js-toggle-button"] = factory();
 	else
-		root["vue-js-toggle-button"] = factory(root["vue"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_1__) {
+		root["vue-js-toggle-button"] = factory();
+})(this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -82,13 +82,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /* styles */
-__webpack_require__(8)
+__webpack_require__(7)
 
-var Component = __webpack_require__(6)(
+var Component = __webpack_require__(5)(
   /* script */
-  __webpack_require__(2),
+  __webpack_require__(1),
   /* template */
-  __webpack_require__(7),
+  __webpack_require__(6),
   /* scopeId */
   "data-v-25adc6c0",
   /* cssModules */
@@ -100,12 +100,6 @@ module.exports = Component.exports
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_1__;
-
-/***/ }),
-/* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -138,18 +132,18 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+//
+//
+//
+//
+//
 
-var constants = {
-  colorChecked: '#75C791',
-  colorUnchecked: '#bfcbd9',
-  cssColors: false,
-  labelChecked: 'on',
-  labelUnchecked: 'off',
-  width: 50,
-  height: 22,
-  margin: 3,
-  switchColor: '#fff'
-};
+var DEFAULT_COLOR_CHECKED = '#75c791';
+var DEFAULT_COLOR_UNCHECKED = '#bfcbd9';
+var DEFAULT_LABEL_CHECKED = 'on';
+var DEFAULT_LABEL_UNCHECKED = 'off';
+var DEFAULT_SWITCH_COLOR = '#fff';
+var MARGIN = 3;
 
 var contains = function contains(object, title) {
   return (typeof object === 'undefined' ? 'undefined' : _typeof(object)) === 'object' && object.hasOwnProperty(title);
@@ -166,12 +160,12 @@ var px = function px(v) {
       type: Boolean,
       default: false
     },
+    name: {
+      type: String
+    },
     disabled: {
       type: Boolean,
       default: false
-    },
-    name: {
-      type: String
     },
     sync: {
       type: Boolean,
@@ -184,7 +178,7 @@ var px = function px(v) {
     color: {
       type: [String, Object],
       validator: function validator(value) {
-        return (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' ? value.checked || value.unchecked : typeof value === 'string';
+        return (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' ? value.checked || value.unchecked || value.disabled : typeof value === 'string';
       }
     },
     switchColor: {
@@ -206,11 +200,14 @@ var px = function px(v) {
     },
     height: {
       type: Number,
-      default: constants.height
+      default: 22
     },
     width: {
       type: Number,
-      default: constants.width
+      default: 50
+    },
+    fontSize: {
+      type: Number
     }
   },
   computed: {
@@ -221,9 +218,6 @@ var px = function px(v) {
 
       return ['vue-js-switch', { toggled: toggled, disabled: disabled }];
     },
-    ariaChecked: function ariaChecked() {
-      return this.toggled.toString();
-    },
     coreStyle: function coreStyle() {
       return {
         width: px(this.width),
@@ -233,23 +227,30 @@ var px = function px(v) {
       };
     },
     buttonRadius: function buttonRadius() {
-      return this.height - constants.margin * 2;
+      return this.height - MARGIN * 2;
     },
     distance: function distance() {
-      return px(this.width - this.height + constants.margin);
+      return px(this.width - this.height + MARGIN);
     },
     buttonStyle: function buttonStyle() {
+      var transition = 'transform ' + this.speed + 'ms';
+
+      var transform = this.toggled ? 'translate3d(' + this.distance + ', 3px, 0px)' : null;
+
+      var background = this.switchColor ? this.switchColorCurrent : null;
+
       return {
         width: px(this.buttonRadius),
         height: px(this.buttonRadius),
-        transition: 'transform ' + this.speed + 'ms',
-        transform: this.toggled ? 'translate3d(' + this.distance + ', 3px, 0px)' : null,
-        background: this.switchColor ? this.switchColorCurrent : undefined
+        transition: transition,
+        transform: transform,
+        background: background
       };
     },
     labelStyle: function labelStyle() {
       return {
-        lineHeight: px(this.height)
+        lineHeight: px(this.height),
+        fontSize: this.fontSize ? px(this.fontSize) : null
       };
     },
     colorChecked: function colorChecked() {
@@ -257,16 +258,16 @@ var px = function px(v) {
 
 
       if ((typeof color === 'undefined' ? 'undefined' : _typeof(color)) !== 'object') {
-        return color || constants.colorChecked;
+        return color || DEFAULT_COLOR_CHECKED;
       }
 
-      return contains(color, 'checked') ? color.checked : constants.colorChecked;
+      return contains(color, 'checked') ? color.checked : DEFAULT_COLOR_CHECKED;
     },
     colorUnchecked: function colorUnchecked() {
       var color = this.color;
 
 
-      return contains(color, 'unchecked') ? color.unchecked : constants.colorUnchecked;
+      return contains(color, 'unchecked') ? color.unchecked : DEFAULT_COLOR_UNCHECKED;
     },
     colorDisabled: function colorDisabled() {
       var color = this.color;
@@ -278,29 +279,35 @@ var px = function px(v) {
       return this.toggled ? this.colorChecked : this.colorUnchecked;
     },
     labelChecked: function labelChecked() {
-      return contains(this.labels, 'checked') ? this.labels.checked : constants.labelChecked;
+      var labels = this.labels;
+
+
+      return contains(labels, 'checked') ? labels.checked : DEFAULT_LABEL_CHECKED;
     },
     labelUnchecked: function labelUnchecked() {
-      return contains(this.labels, 'unchecked') ? this.labels.unchecked : constants.labelUnchecked;
+      var labels = this.labels;
+
+
+      return contains(labels, 'unchecked') ? labels.unchecked : DEFAULT_LABEL_UNCHECKED;
     },
     switchColorChecked: function switchColorChecked() {
       var switchColor = this.switchColor;
 
 
-      return contains(switchColor, 'checked') ? switchColor.checked : constants.switchColor;
+      return contains(switchColor, 'checked') ? switchColor.checked : DEFAULT_SWITCH_COLOR;
     },
     switchColorUnchecked: function switchColorUnchecked() {
       var switchColor = this.switchColor;
 
 
-      return contains(switchColor, 'unchecked') ? switchColor.unchecked : constants.switchColor;
+      return contains(switchColor, 'unchecked') ? switchColor.unchecked : DEFAULT_SWITCH_COLOR;
     },
     switchColorCurrent: function switchColorCurrent() {
       var switchColor = this.switchColor;
 
 
       if ((typeof switchColor === 'undefined' ? 'undefined' : _typeof(switchColor)) !== 'object') {
-        return switchColor || constants.switchColor;
+        return switchColor || DEFAULT_SWITCH_COLOR;
       }
 
       return this.toggled ? this.switchColorChecked : this.switchColorUnchecked;
@@ -332,42 +339,47 @@ var px = function px(v) {
 });
 
 /***/ }),
-/* 3 */
+/* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Button_vue__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Button_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Button_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Button_vue__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Button_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Button_vue__);
+/* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "ToggleButton", function() { return __WEBPACK_IMPORTED_MODULE_0__Button_vue___default.a; });
 
 
+var installed = false;
 
-var plugin = {
-  install: function install(Vue, options) {
-    Vue.component('ToggleButton', __WEBPACK_IMPORTED_MODULE_1__Button_vue___default.a);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  install: function install(Vue) {
+    if (installed) {
+      return;
+    }
+
+    Vue.component('ToggleButton', __WEBPACK_IMPORTED_MODULE_0__Button_vue___default.a);
+    installed = true;
   }
-};
+});
 
-/* harmony default export */ __webpack_exports__["default"] = (plugin);
+
 
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(4)();
 // imports
 
 
 // module
-exports.push([module.i, ".vue-js-switch[data-v-25adc6c0]{display:inline-block;position:relative;overflow:hidden;vertical-align:middle;user-select:none;font-size:10px;cursor:pointer}.vue-js-switch .v-switch-input[data-v-25adc6c0]{display:none}.vue-js-switch .v-switch-label[data-v-25adc6c0]{position:absolute;top:0;font-weight:600;color:#fff}.vue-js-switch .v-switch-label.v-left[data-v-25adc6c0]{left:10px}.vue-js-switch .v-switch-label.v-right[data-v-25adc6c0]{right:10px}.vue-js-switch .v-switch-core[data-v-25adc6c0]{display:block;position:relative;box-sizing:border-box;outline:0;margin:0;transition:border-color .3s,background-color .3s;user-select:none}.vue-js-switch .v-switch-core .v-switch-button[data-v-25adc6c0]{display:block;position:absolute;overflow:hidden;top:0;left:0;transform:translate3d(3px,3px,0);border-radius:100%;background-color:#fff}.vue-js-switch.disabled[data-v-25adc6c0]{pointer-events:none;opacity:.6}", ""]);
+exports.push([module.i, ".vue-js-switch[data-v-25adc6c0]{display:inline-block;position:relative;overflow:hidden;vertical-align:middle;user-select:none;font-size:10px;cursor:pointer}.vue-js-switch .v-switch-input[data-v-25adc6c0]{opacity:0;position:absolute;width:1px;height:1px}.vue-js-switch .v-switch-label[data-v-25adc6c0]{position:absolute;top:0;font-weight:600;color:#fff;z-index:1}.vue-js-switch .v-switch-label.v-left[data-v-25adc6c0]{left:10px}.vue-js-switch .v-switch-label.v-right[data-v-25adc6c0]{right:10px}.vue-js-switch .v-switch-core[data-v-25adc6c0]{display:block;position:relative;box-sizing:border-box;outline:0;margin:0;transition:border-color .3s,background-color .3s;user-select:none}.vue-js-switch .v-switch-core .v-switch-button[data-v-25adc6c0]{display:block;position:absolute;overflow:hidden;top:0;left:0;transform:translate3d(3px,3px,0);border-radius:100%;background-color:#fff;z-index:2}.vue-js-switch.disabled[data-v-25adc6c0]{pointer-events:none;opacity:.6}", ""]);
 
 // exports
 
 
 /***/ }),
-/* 5 */
+/* 4 */
 /***/ (function(module, exports) {
 
 /*
@@ -423,7 +435,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports) {
 
 // this module is a runtime utility for cleaner component module output and will
@@ -480,21 +492,20 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('label', {
-    class: _vm.className,
-    attrs: {
-      "role": "checkbox",
-      "aria-checked": _vm.ariaChecked
-    }
+    class: _vm.className
   }, [_c('input', {
     staticClass: "v-switch-input",
     attrs: {
       "type": "checkbox",
       "name": _vm.name
+    },
+    domProps: {
+      "checked": _vm.value
     },
     on: {
       "change": function($event) {
@@ -510,34 +521,32 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     style: (_vm.buttonStyle)
   })]), _vm._v(" "), (_vm.labels) ? [(_vm.toggled) ? _c('span', {
     staticClass: "v-switch-label v-left",
-    style: (_vm.labelStyle),
-    domProps: {
-      "innerHTML": _vm._s(_vm.labelChecked)
-    }
-  }) : _c('span', {
+    style: (_vm.labelStyle)
+  }, [_vm._t("checked", [
+    [_vm._v(_vm._s(_vm.labelChecked))]
+  ])], 2) : _c('span', {
     staticClass: "v-switch-label v-right",
-    style: (_vm.labelStyle),
-    domProps: {
-      "innerHTML": _vm._s(_vm.labelUnchecked)
-    }
-  })] : _vm._e()], 2)
+    style: (_vm.labelStyle)
+  }, [_vm._t("unchecked", [
+    [_vm._v(_vm._s(_vm.labelUnchecked))]
+  ])], 2)] : _vm._e()], 2)
 },staticRenderFns: []}
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(4);
+var content = __webpack_require__(3);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(9)("2283861f", content, true);
+var update = __webpack_require__(8)("2283861f", content, true);
 
 /***/ }),
-/* 9 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -556,7 +565,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(10)
+var listToStyles = __webpack_require__(9)
 
 /*
 type StyleObject = {
@@ -758,7 +767,7 @@ function applyToTag (styleElement, obj) {
 
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, exports) {
 
 /**

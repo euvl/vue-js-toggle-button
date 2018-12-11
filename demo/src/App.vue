@@ -79,7 +79,7 @@
     <div class="padding">
       <h2>And be programatically set/reset</h2>
       <div>
-        <span v-for="(item, i) in items" style="padding: 5px">
+        <span v-for="(item, i) in items" :key="i" style="padding: 5px">
           <toggle-button
             :value="item.value"
             :color="item.color"
