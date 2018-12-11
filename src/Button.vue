@@ -32,7 +32,6 @@ const constants = {
   labelUnchecked: 'off',
   width: 50,
   height: 22,
-  fontSize: 16,
   margin: 3,
   switchColor: '#fff'
 }
@@ -100,8 +99,7 @@ export default {
       default: constants.width
     },
     fontSize: {
-	  type: Number,
-	  default: constants.fontSize
+      type: Number
     }
   },
   computed: {
@@ -147,7 +145,7 @@ export default {
     labelStyle () {
       return {
         lineHeight: px(this.height),
-        fontSize: px(this.fontSize)
+        fontSize: this.fontSize ? px(this.fontSize) : null
       }
     },
 
