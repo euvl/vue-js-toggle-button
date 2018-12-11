@@ -107,6 +107,9 @@ export default {
     width: {
       type: Number,
       default: constants.width
+    },
+    fontSize: {
+      type: Number
     }
   },
   computed: {
@@ -149,7 +152,8 @@ export default {
 
     labelStyle () {
       return {
-        lineHeight: px(this.height)
+        lineHeight: px(this.height),
+        fontSize: this.fontSize ? px(this.fontSize) : null
       }
     },
 
