@@ -47,6 +47,22 @@
           :color="{checked: '#7DCE94', unchecked: '#82C7EB'}"
           :width="80"
           :switchColor="{checked: 'linear-gradient(red, yellow)', unchecked: '#F2C00B'}"/>
+
+        <toggle-button :labels="true">
+          <template slot="checked">
+            <fa icon='check'></fa>
+          </template>
+          <template slot="unchecked">
+            <fa icon='times'></fa>
+          </template>
+        </toggle-button>
+
+        <toggle-button :width="120" :labels="{checked: '', unchecked: 'FA Icon Support'}">
+          <template slot="checked">
+            <fa icon='check'></fa>
+          </template>
+        </toggle-button>
+
       </div>
       <div style="padding-top: 20px;">
         <toggle-button
