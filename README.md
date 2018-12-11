@@ -1,15 +1,18 @@
 [![npm version](https://badge.fury.io/js/vue-js-toggle-button.svg)](https://badge.fury.io/js/vue-js-toggle-button)
 [![npm](https://img.shields.io/npm/dm/vue-js-toggle-button.svg)](https://www.npmjs.com/package/vue-js-toggle-button)
-<br/>
-<a align="right" href="https://www.buymeacoffee.com/yev" target="_blank">
-  <img width="200" alt="screen shot 2018-03-01 at 10 33 39" src="https://user-images.githubusercontent.com/1577802/36840220-21beb89c-1d3c-11e8-98a4-45fc334842cf.png">
+
+<p align="right">
+<a href="https://www.buymeacoffee.com/yev" target="_blank">
+  <img
+       width="200"
+       alt="Get a coffee"
+       src="https://user-images.githubusercontent.com/1577802/36840220-21beb89c-1d3c-11e8-98a4-45fc334842cf.png">
 </a>
+</p>
 
 ### Vue.js toggle/switch button.
 
 ![Imgur](http://i.imgur.com/a2Hf7pm.png)
-
-Feel free to ask questions or propose features in the "Issues" section
 
 [Live demo here](http://vue-js-toggle-button.yev.io/)
 
