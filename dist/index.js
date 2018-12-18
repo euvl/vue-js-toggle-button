@@ -206,6 +206,10 @@ var px = function px(v) {
       type: Number,
       default: 50
     },
+    margin: {
+      type: Number,
+      default: 3
+    },
     fontSize: {
       type: Number
     }
@@ -227,15 +231,15 @@ var px = function px(v) {
       };
     },
     buttonRadius: function buttonRadius() {
-      return this.height - MARGIN * 2;
+      return this.height - this.margin * 2;
     },
     distance: function distance() {
-      return px(this.width - this.height + MARGIN);
+      return px(this.width - this.height + this.margin);
     },
     buttonStyle: function buttonStyle() {
       var transition = 'transform ' + this.speed + 'ms';
 
-      var transform = this.toggled ? 'translate3d(' + this.distance + ', 3px, 0px)' : null;
+      var transform = this.toggled ? 'translate3d(' + this.distance + ', ' + px(this.margin) + ', 0px)' : 'translate3d(' + px(this.margin) + ', ' + px(this.margin) + ', 0px)';
 
       var background = this.switchColor ? this.switchColorCurrent : null;
 
@@ -373,7 +377,7 @@ exports = module.exports = __webpack_require__(4)();
 
 
 // module
-exports.push([module.i, ".vue-js-switch[data-v-25adc6c0]{display:inline-block;position:relative;overflow:hidden;vertical-align:middle;user-select:none;font-size:10px;cursor:pointer}.vue-js-switch .v-switch-input[data-v-25adc6c0]{opacity:0;position:absolute;width:1px;height:1px}.vue-js-switch .v-switch-label[data-v-25adc6c0]{position:absolute;top:0;font-weight:600;color:#fff;z-index:1}.vue-js-switch .v-switch-label.v-left[data-v-25adc6c0]{left:10px}.vue-js-switch .v-switch-label.v-right[data-v-25adc6c0]{right:10px}.vue-js-switch .v-switch-core[data-v-25adc6c0]{display:block;position:relative;box-sizing:border-box;outline:0;margin:0;transition:border-color .3s,background-color .3s;user-select:none}.vue-js-switch .v-switch-core .v-switch-button[data-v-25adc6c0]{display:block;position:absolute;overflow:hidden;top:0;left:0;transform:translate3d(3px,3px,0);border-radius:100%;background-color:#fff;z-index:2}.vue-js-switch.disabled[data-v-25adc6c0]{pointer-events:none;opacity:.6}", ""]);
+exports.push([module.i, ".vue-js-switch[data-v-25adc6c0]{display:inline-block;position:relative;vertical-align:middle;user-select:none;font-size:10px;cursor:pointer}.vue-js-switch .v-switch-input[data-v-25adc6c0]{opacity:0;position:absolute;width:1px;height:1px}.vue-js-switch .v-switch-label[data-v-25adc6c0]{position:absolute;top:0;font-weight:600;color:#fff;z-index:1}.vue-js-switch .v-switch-label.v-left[data-v-25adc6c0]{left:10px}.vue-js-switch .v-switch-label.v-right[data-v-25adc6c0]{right:10px}.vue-js-switch .v-switch-core[data-v-25adc6c0]{display:block;position:relative;box-sizing:border-box;outline:0;margin:0;transition:border-color .3s,background-color .3s;user-select:none}.vue-js-switch .v-switch-core .v-switch-button[data-v-25adc6c0]{display:block;position:absolute;overflow:hidden;top:0;left:0;border-radius:100%;background-color:#fff;z-index:2}.vue-js-switch.disabled[data-v-25adc6c0]{pointer-events:none;opacity:.6}", ""]);
 
 // exports
 

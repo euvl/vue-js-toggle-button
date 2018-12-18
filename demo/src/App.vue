@@ -43,7 +43,7 @@
           :disabled="true"/>
 
         <toggle-button :value="true"
-          :labels="{checked: 'Button', unchecked: 'Collor'}"
+          :labels="{checked: 'Button', unchecked: 'Color'}"
           :color="{checked: '#7DCE94', unchecked: '#82C7EB'}"
           :width="80"
           :switchColor="{checked: 'linear-gradient(red, yellow)', unchecked: '#F2C00B'}"/>
@@ -63,6 +63,11 @@
           </template>
         </toggle-button>
 
+        <toggle-button
+          :value="true"
+          :width="80"
+          :labels="{checked: 'Custom', unchecked: 'Margin'}"
+          :margin="7"/>
       </div>
       <div style="padding-top: 20px;">
         <toggle-button

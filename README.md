@@ -76,6 +76,7 @@ Vue.component('ToggleButton', ToggleButton)
 | switchColor     | [String, Object]  | `#BFCBD9`  | If `String` - color or background property of the switch when checked <br>If `Object` - colors or background property for the switch when checked/uncheked <br>Example: `{checked: '#25EF02', unchecked: 'linear-gradient(red, yellow)'}`   |
 | width           | Number            | 50         | Width of the button |
 | height          | Number            | 22         | Height of the button |
+| margin          | Number            | 3          | Space between the switch and background border |
 | name            | String            | undefined  | Name to attach to the generated input field |
 | fontSize        | Number            | undefined  | Font size |
 
