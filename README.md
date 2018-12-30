@@ -100,7 +100,7 @@ And your `plugins/vue-js-toggle-button.js` will look like:
 
 ```javascript
 import Vue from 'vue'
-import Button from 'vue-js-toggle-button/dist/ssr.index'
+import Button from 'vue-js-toggle-button'
 
 Vue.use(Button)
 ```
