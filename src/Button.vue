@@ -4,6 +4,7 @@
          class="v-switch-input"
          :name="name"
          :checked="value"
+         :disabled="disabled"
          @change.stop="toggle">
   <div class="v-switch-core"
         :style="coreStyle">
