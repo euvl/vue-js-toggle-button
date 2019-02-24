@@ -137,13 +137,23 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var DEFAULT_COLOR_CHECKED = '#75c791';
 var DEFAULT_COLOR_UNCHECKED = '#bfcbd9';
 var DEFAULT_LABEL_CHECKED = 'on';
 var DEFAULT_LABEL_UNCHECKED = 'off';
 var DEFAULT_SWITCH_COLOR = '#fff';
-var MARGIN = 3;
 
 var contains = function contains(object, title) {
   return (typeof object === 'undefined' ? 'undefined' : _typeof(object)) === 'object' && object.hasOwnProperty(title);
@@ -151,6 +161,12 @@ var contains = function contains(object, title) {
 
 var px = function px(v) {
   return v + 'px';
+};
+
+var translate3d = function translate3d(x, y) {
+  var z = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '0px';
+
+  return 'translate3d(' + x + ', ' + y + ', ' + z + ')';
 };
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -238,8 +254,9 @@ var px = function px(v) {
     },
     buttonStyle: function buttonStyle() {
       var transition = 'transform ' + this.speed + 'ms';
+      var margin = px(this.margin);
 
-      var transform = this.toggled ? 'translate3d(' + this.distance + ', ' + px(this.margin) + ', 0px)' : 'translate3d(' + px(this.margin) + ', ' + px(this.margin) + ', 0px)';
+      var transform = this.toggled ? translate3d(this.distance, margin) : translate3d(margin, margin);
 
       var background = this.switchColor ? this.switchColorCurrent : null;
 
@@ -506,7 +523,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "v-switch-input",
     attrs: {
       "type": "checkbox",
-      "name": _vm.name
+      "name": _vm.name,
+      "disabled": _vm.disabled
     },
     domProps: {
       "checked": _vm.value

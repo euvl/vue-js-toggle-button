@@ -1,27 +1,37 @@
 <template>
 <label :class="className">
-  <input type="checkbox"
-         class="v-switch-input"
-         :name="name"
-         :checked="value"
-         :disabled="disabled"
-         @change.stop="toggle">
-  <div class="v-switch-core"
-        :style="coreStyle">
-    <div class="v-switch-button"
-        :style="buttonStyle"/>
+  <input
+    type="checkbox"
+    class="v-switch-input"
+    :name="name"
+    :checked="value"
+    :disabled="disabled"
+    @change.stop="toggle"
+  >
+  <div
+    class="v-switch-core"
+    :style="coreStyle"
+  >
+    <div
+      class="v-switch-button"
+      :style="buttonStyle"
+    />
   </div>
   <template v-if="labels">
-    <span class="v-switch-label v-left"
-          :style="labelStyle"
-          v-if="toggled">
+    <span
+      class="v-switch-label v-left"
+      :style="labelStyle"
+      v-if="toggled"
+    >
       <slot name="checked">
         <template>{{labelChecked}}</template>
       </slot>
     </span>
-    <span class="v-switch-label v-right"
-          :style="labelStyle"
-          v-else>
+    <span
+      class="v-switch-label v-right"
+      :style="labelStyle"
+      v-else
+    >
       <slot name="unchecked">
         <template>{{labelUnchecked}}</template>
       </slot>
@@ -41,6 +51,10 @@ const contains = (object, title) =>
   typeof object === 'object' && object.hasOwnProperty(title)
 
 const px = v => v + 'px'
+
+const translate3d = (x, y, z = '0px') => {
+  return `translate3d(${x}, ${y}, ${z})`
+}
 
 export default {
   name: 'ToggleButton',
@@ -112,7 +126,7 @@ export default {
   computed: {
     className () {
       let { toggled, disabled } = this
-
+      
       return ['vue-js-switch', { toggled, disabled }]
     },
 
@@ -137,10 +151,11 @@ export default {
 
     buttonStyle () {
       const transition = `transform ${this.speed}ms`
+      const margin = px(this.margin)
 
       const transform = this.toggled
-        ? `translate3d(${this.distance}, ${px(this.margin)}, 0px)`
-        : `translate3d(${px(this.margin)}, ${px(this.margin)}, 0px)`
+        ? translate3d(this.distance, margin)
+        : translate3d(margin, margin)
 
       const background = this.switchColor
         ? this.switchColorCurrent
