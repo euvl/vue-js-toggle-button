@@ -82,13 +82,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /* styles */
-__webpack_require__(7)
+__webpack_require__(6)
 
-var Component = __webpack_require__(5)(
+var Component = __webpack_require__(4)(
   /* script */
   __webpack_require__(1),
   /* template */
-  __webpack_require__(6),
+  __webpack_require__(5),
   /* scopeId */
   "data-v-25adc6c0",
   /* cssModules */
@@ -137,13 +137,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+//
 
 var DEFAULT_COLOR_CHECKED = '#75c791';
 var DEFAULT_COLOR_UNCHECKED = '#bfcbd9';
 var DEFAULT_LABEL_CHECKED = 'on';
 var DEFAULT_LABEL_UNCHECKED = 'off';
 var DEFAULT_SWITCH_COLOR = '#fff';
-var MARGIN = 3;
 
 var contains = function contains(object, title) {
   return (typeof object === 'undefined' ? 'undefined' : _typeof(object)) === 'object' && object.hasOwnProperty(title);
@@ -370,76 +370,12 @@ var installed = false;
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-exports = module.exports = __webpack_require__(4)();
-// imports
-
-
-// module
-exports.push([module.i, ".vue-js-switch[data-v-25adc6c0]{display:inline-block;position:relative;vertical-align:middle;user-select:none;font-size:10px;cursor:pointer}.vue-js-switch .v-switch-input[data-v-25adc6c0]{opacity:0;position:absolute;width:1px;height:1px}.vue-js-switch .v-switch-label[data-v-25adc6c0]{position:absolute;top:0;font-weight:600;color:#fff;z-index:1}.vue-js-switch .v-switch-label.v-left[data-v-25adc6c0]{left:10px}.vue-js-switch .v-switch-label.v-right[data-v-25adc6c0]{right:10px}.vue-js-switch .v-switch-core[data-v-25adc6c0]{display:block;position:relative;box-sizing:border-box;outline:0;margin:0;transition:border-color .3s,background-color .3s;user-select:none}.vue-js-switch .v-switch-core .v-switch-button[data-v-25adc6c0]{display:block;position:absolute;overflow:hidden;top:0;left:0;border-radius:100%;background-color:#fff;z-index:2}.vue-js-switch.disabled[data-v-25adc6c0]{pointer-events:none;opacity:.6}", ""]);
-
-// exports
-
+throw new Error("Module build failed: Error: Missing binding /Users/yev.vlasenko2/Projects/vue/vue-js-toggle-button/node_modules/node-sass/vendor/darwin-x64-64/binding.node\nNode Sass could not find a binding for your current environment: OS X 64-bit with Node.js 10.x\n\nFound bindings for the following environments:\n  - OS X 64-bit with Node.js 8.x\n\nThis usually happens because your environment has changed since running `npm install`.\nRun `npm rebuild node-sass` to download the binding for your current environment.\n    at module.exports (/Users/yev.vlasenko2/Projects/vue/vue-js-toggle-button/node_modules/node-sass/lib/binding.js:15:13)\n    at Object.<anonymous> (/Users/yev.vlasenko2/Projects/vue/vue-js-toggle-button/node_modules/node-sass/lib/index.js:14:35)\n    at Module._compile (internal/modules/cjs/loader.js:688:30)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:699:10)\n    at Module.load (internal/modules/cjs/loader.js:598:32)\n    at tryModuleLoad (internal/modules/cjs/loader.js:537:12)\n    at Function.Module._load (internal/modules/cjs/loader.js:529:3)\n    at Module.require (internal/modules/cjs/loader.js:636:17)\n    at require (internal/modules/cjs/helpers.js:20:18)\n    at Object.<anonymous> (/Users/yev.vlasenko2/Projects/vue/vue-js-toggle-button/node_modules/sass-loader/lib/loader.js:3:14)\n    at Module._compile (internal/modules/cjs/loader.js:688:30)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:699:10)\n    at Module.load (internal/modules/cjs/loader.js:598:32)\n    at tryModuleLoad (internal/modules/cjs/loader.js:537:12)\n    at Function.Module._load (internal/modules/cjs/loader.js:529:3)\n    at Module.require (internal/modules/cjs/loader.js:636:17)\n    at require (internal/modules/cjs/helpers.js:20:18)\n    at loadLoader (/Users/yev.vlasenko2/Projects/vue/vue-js-toggle-button/node_modules/loader-runner/lib/loadLoader.js:13:17)\n    at iteratePitchingLoaders (/Users/yev.vlasenko2/Projects/vue/vue-js-toggle-button/node_modules/loader-runner/lib/LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (/Users/yev.vlasenko2/Projects/vue/vue-js-toggle-button/node_modules/loader-runner/lib/LoaderRunner.js:165:10)\n    at /Users/yev.vlasenko2/Projects/vue/vue-js-toggle-button/node_modules/loader-runner/lib/LoaderRunner.js:173:18\n    at loadLoader (/Users/yev.vlasenko2/Projects/vue/vue-js-toggle-button/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/yev.vlasenko2/Projects/vue/vue-js-toggle-button/node_modules/loader-runner/lib/LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (/Users/yev.vlasenko2/Projects/vue/vue-js-toggle-button/node_modules/loader-runner/lib/LoaderRunner.js:165:10)\n    at /Users/yev.vlasenko2/Projects/vue/vue-js-toggle-button/node_modules/loader-runner/lib/LoaderRunner.js:173:18\n    at loadLoader (/Users/yev.vlasenko2/Projects/vue/vue-js-toggle-button/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/yev.vlasenko2/Projects/vue/vue-js-toggle-button/node_modules/loader-runner/lib/LoaderRunner.js:169:2)\n    at runLoaders (/Users/yev.vlasenko2/Projects/vue/vue-js-toggle-button/node_modules/loader-runner/lib/LoaderRunner.js:362:2)\n    at NormalModule.doBuild (/Users/yev.vlasenko2/Projects/vue/vue-js-toggle-button/node_modules/webpack/lib/NormalModule.js:179:3)\n    at NormalModule.build (/Users/yev.vlasenko2/Projects/vue/vue-js-toggle-button/node_modules/webpack/lib/NormalModule.js:268:15)");
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function() {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		var result = [];
-		for(var i = 0; i < this.length; i++) {
-			var item = this[i];
-			if(item[2]) {
-				result.push("@media " + item[2] + "{" + item[1] + "}");
-			} else {
-				result.push(item[1]);
-			}
-		}
-		return result.join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-
-/***/ }),
-/* 5 */
 /***/ (function(module, exports) {
 
 // this module is a runtime utility for cleaner component module output and will
@@ -496,7 +432,7 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -506,7 +442,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "v-switch-input",
     attrs: {
       "type": "checkbox",
-      "name": _vm.name
+      "name": _vm.name,
+      "disabled": _vm.disabled
     },
     domProps: {
       "checked": _vm.value
@@ -537,7 +474,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },staticRenderFns: []}
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
@@ -547,10 +484,10 @@ var content = __webpack_require__(3);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("2283861f", content, true);
+var update = __webpack_require__(7)("2283861f", content, true);
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -569,7 +506,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(9)
+var listToStyles = __webpack_require__(8)
 
 /*
 type StyleObject = {
@@ -771,7 +708,7 @@ function applyToTag (styleElement, obj) {
 
 
 /***/ }),
-/* 9 */
+/* 8 */
 /***/ (function(module, exports) {
 
 /**
