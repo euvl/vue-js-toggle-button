@@ -36,7 +36,6 @@ const DEFAULT_COLOR_UNCHECKED = '#bfcbd9'
 const DEFAULT_LABEL_CHECKED = 'on'
 const DEFAULT_LABEL_UNCHECKED = 'off'
 const DEFAULT_SWITCH_COLOR = '#fff'
-const MARGIN = 3
 
 const contains = (object, title) => 
   typeof object === 'object' && object.hasOwnProperty(title)
@@ -102,6 +101,10 @@ export default {
       type: Number,
       default: 50
     },
+    margin: {
+      type: Number,
+      default: 3
+    },
     fontSize: {
       type: Number
     }
@@ -125,19 +128,19 @@ export default {
     },
 
     buttonRadius () {
-      return this.height - MARGIN * 2;
+      return this.height - this.margin * 2;
     },
 
     distance () {
-      return px(this.width - this.height + MARGIN)
+      return px(this.width - this.height + this.margin)
     },
 
     buttonStyle () {
       const transition = `transform ${this.speed}ms`
 
       const transform = this.toggled
-        ? `translate3d(${this.distance}, 3px, 0px)`
-        : null
+        ? `translate3d(${this.distance}, ${px(this.margin)}, 0px)`
+        : `translate3d(${px(this.margin)}, ${px(this.margin)}, 0px)`
 
       const background = this.switchColor
         ? this.switchColorCurrent
@@ -264,12 +267,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$margin: 3px;
 
 .vue-js-switch {
   display: inline-block;
   position: relative;
-  overflow: hidden;
   vertical-align: middle;
   user-select: none;
   font-size: 10px;
@@ -317,7 +318,6 @@ $margin: 3px;
       top: 0;
       left: 0;
 
-      transform: translate3d($margin, $margin, 0);
       border-radius: 100%;
       background-color: #fff;
       z-index: 2;
