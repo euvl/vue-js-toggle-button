@@ -1,11 +1,12 @@
 <template>
-<label :class="className">
+<label :class="className" tabindex="0" @keydown.space.prevent="keyToggle">
   <input
     type="checkbox"
     class="v-switch-input"
     :name="name"
     :checked="value"
     :disabled="disabled"
+    tabindex="-1"
     @change.stop="toggle"
   >
   <div
@@ -269,6 +270,14 @@ export default {
     }
   },
   methods: {
+    keyToggle(event) {
+      // the key event happens whether the control is disabled or not
+      // nothing should be done if disabled is true
+      if(this.disabled) {
+        return;
+      }
+      this.toggle(event);
+    },
     toggle (event) {
       this.toggled = !this.toggled
       this.$emit('input', this.toggled)

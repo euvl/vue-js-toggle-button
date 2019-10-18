@@ -148,6 +148,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+//
 
 var DEFAULT_COLOR_CHECKED = '#75c791';
 var DEFAULT_COLOR_UNCHECKED = '#bfcbd9';
@@ -348,6 +349,14 @@ var translate3d = function translate3d(x, y) {
   },
 
   methods: {
+    keyToggle: function keyToggle(event) {
+      // the key event happens whether the control is disabled or not
+      // nothing should be done if disabled is true
+      if (this.disabled) {
+        return;
+      }
+      this.toggle(event);
+    },
     toggle: function toggle(event) {
       this.toggled = !this.toggled;
       this.$emit('input', this.toggled);
@@ -518,13 +527,24 @@ module.exports = function normalizeComponent (
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('label', {
-    class: _vm.className
+    class: _vm.className,
+    attrs: {
+      "tabindex": "0"
+    },
+    on: {
+      "keydown": function($event) {
+        if (!$event.type.indexOf('key') && _vm._k($event.keyCode, "space", 32, $event.key, [" ", "Spacebar"])) { return null; }
+        $event.preventDefault();
+        return _vm.keyToggle($event)
+      }
+    }
   }, [_c('input', {
     staticClass: "v-switch-input",
     attrs: {
       "type": "checkbox",
       "name": _vm.name,
-      "disabled": _vm.disabled
+      "disabled": _vm.disabled,
+      "tabindex": "-1"
     },
     domProps: {
       "checked": _vm.value
