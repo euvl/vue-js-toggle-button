@@ -105,20 +105,22 @@ export default {
     return {
       toggled: false,
       items: [
-        {color: '#E8D2AE', value: false},
-        {color: '#CB8589', value: false},
-        {color: '#796465', value: false},
-        {color: '#79BD8F', value: false},
-        {color: '#00A388', value: false}
+        { color: '#E8D2AE', value: false },
+        { color: '#CB8589', value: false },
+        { color: '#796465', value: false },
+        { color: '#79BD8F', value: false },
+        { color: '#00A388', value: false }
       ],
       hodor: false
     }
   },
   mounted () {
-    var i = 0;
+    var itemIndex = 0;
+
     setInterval(() => {
-      this.updateItemValue(i)
-      i = (i + 1) % this.items.length
+      this.updateItemValue(itemIndex)
+
+      itemIndex = (itemIndex + 1) % this.items.length
     }, 600)
   },
   methods: {
