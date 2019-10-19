@@ -70,6 +70,9 @@ export default {
       type: Boolean,
       default: false
     },
+    tag: {
+      type: String,
+    },
     sync: {
       type: Boolean,
       default: false
@@ -269,14 +272,18 @@ export default {
     }
   },
   methods: {
-    toggle (event) {
-      this.toggled = !this.toggled
-      this.$emit('input', this.toggled)
+    toggle(event) {
+      const toggled = !this.toggled;
+      if (!this.sync) {
+        this.toggled = toggled;
+      }
+      this.$emit('input', toggled);
       this.$emit('change', {
-        value: this.toggled,
-        srcEvent: event
-      })
-    }
+        value: toggled,
+        tag: this.tag,
+        srcEvent: event,
+      });
+    },
   }
 }
 </script>
