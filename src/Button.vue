@@ -42,20 +42,13 @@
 </template>
 
 <script>
+import { isString, isObject, isBoolean, has, get, translate3d, px } from './utils'
+
 const DEFAULT_COLOR_CHECKED = '#75c791'
 const DEFAULT_COLOR_UNCHECKED = '#bfcbd9'
 const DEFAULT_LABEL_CHECKED = 'on'
 const DEFAULT_LABEL_UNCHECKED = 'off'
 const DEFAULT_SWITCH_COLOR = '#fff'
-
-const contains = (object, title) => 
-  typeof object === 'object' && object.hasOwnProperty(title)
-
-const px = v => v + 'px'
-
-const translate3d = (x, y, z = '0px') => {
-  return `translate3d(${x}, ${y}, ${z})`
-}
 
 export default {
   name: 'ToggleButton',
@@ -71,6 +64,9 @@ export default {
       type: Boolean,
       default: false
     },
+    tag: {
+      type: String,
+    },
     sync: {
       type: Boolean,
       default: false
@@ -82,17 +78,18 @@ export default {
     color: {
       type: [String, Object],
       validator (value) {
-        return typeof value === 'object'
-          ? (value.checked || value.unchecked || value.disabled)
-          : typeof value === 'string'
+        return isString(value)
+          || has(value, 'checked')
+          || has(value, 'unchecked')
+          || has(value, 'disabled')
       }
     },
     switchColor: {
       type: [String, Object],
       validator (value) {
-        return typeof value === 'object'
-          ? (value.checked || value.unchecked)
-          : typeof value === 'string'
+        return isString(value) 
+          || has(value, 'checked')
+          || has(value, 'unchecked')
       }
     },
     cssColors: {
@@ -128,7 +125,10 @@ export default {
     className () {
       let { toggled, disabled } = this
       
-      return ['vue-js-switch', { toggled, disabled }]
+      return ['vue-js-switch', {
+        toggled,
+        disabled
+      }]
     },
 
     coreStyle () {
@@ -181,29 +181,19 @@ export default {
     colorChecked () {
       let { color } = this
 
-      if (typeof color !== 'object') {
+      if (!isObject(color)) {
         return color || DEFAULT_COLOR_CHECKED
       }
 
-      return contains(color, 'checked')
-        ? color.checked
-        : DEFAULT_COLOR_CHECKED
+      return get(color, 'checked', DEFAULT_COLOR_CHECKED)
     },
 
     colorUnchecked () {
-      let { color } = this
-
-      return contains(color, 'unchecked')
-        ? color.unchecked
-        : DEFAULT_COLOR_UNCHECKED
+      return get(this.color, 'unchecked', DEFAULT_COLOR_UNCHECKED)
     },
 
     colorDisabled () {
-      let { color } = this
-
-      return contains(color, 'disabled')
-        ? color.disabled
-        : this.colorCurrent
+      return get(this.color, 'disabled', this.colorCurrent)
     },
 
     colorCurrent () {
@@ -213,42 +203,26 @@ export default {
     },
 
     labelChecked () {
-      const { labels } = this
-
-      return contains(labels, 'checked')
-        ? labels.checked
-        : DEFAULT_LABEL_CHECKED
+      return get(this.labels, 'checked', DEFAULT_LABEL_CHECKED)
     },
 
     labelUnchecked () {
-      const { labels } = this
-
-      return contains(labels, 'unchecked')
-        ? labels.unchecked
-        : DEFAULT_LABEL_UNCHECKED
+      return get(this.labels, 'unchecked', DEFAULT_LABEL_UNCHECKED)
     },
 
     switchColorChecked () {
-      const { switchColor } = this
-
-      return contains(switchColor, 'checked')
-        ? switchColor.checked
-        : DEFAULT_SWITCH_COLOR
+      return get(this.switchColor, 'checked', DEFAULT_SWITCH_COLOR)
     },
 
     switchColorUnchecked () {
-      const { switchColor } = this
-
-      return contains(switchColor, 'unchecked')
-        ? switchColor.unchecked
-        : DEFAULT_SWITCH_COLOR
+      return get(this.switchColor, 'unchecked', DEFAULT_SWITCH_COLOR)
     },
 
     switchColorCurrent () {
       let { switchColor } = this
 
-      if (typeof switchColor !== 'object') {
-        return switchColor || DEFAULT_SWITCH_COLOR
+      if (!isObject(this.switchColor)) {
+        return this.switchColor || DEFAULT_SWITCH_COLOR
       }
 
       return this.toggled
@@ -278,14 +252,20 @@ export default {
       }
       this.toggle(event);
     },
-    toggle (event) {
-      this.toggled = !this.toggled
-      this.$emit('input', this.toggled)
+    toggle(event) {
+      const toggled = !this.toggled;
+
+      if (!this.sync) {
+        this.toggled = toggled;
+      }
+
+      this.$emit('input', toggled);
       this.$emit('change', {
-        value: this.toggled,
-        srcEvent: event
-      })
-    }
+        value: toggled,
+        tag: this.tag,
+        srcEvent: event,
+      });
+    },
   }
 }
 </script>

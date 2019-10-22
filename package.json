@@ -10,6 +10,7 @@
     "build": "npm run build:client && npm run build:ssr"
   },
   "main": "dist/index.js",
+  "types": "index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/euvl/vue-js-toggle-button.git"
