@@ -328,9 +328,9 @@ var DEFAULT_SWITCH_COLOR = '#fff';
     toggle: function toggle(event) {
       var toggled = !this.toggled;
 
-      // if (!this.sync) {
-      this.toggled = toggled;
-      // }
+      if (!this.sync) {
+        this.toggled = toggled;
+      }
 
       this.$emit('input', toggled);
       this.$emit('change', {
