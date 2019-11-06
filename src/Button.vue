@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { isString, isObject, isBoolean, has, get, translate3d, px } from './utils'
+import { isString, isObject, isBoolean, has, get, translate, px } from './utils'
 
 const DEFAULT_COLOR_CHECKED = '#75c791'
 const DEFAULT_COLOR_UNCHECKED = '#bfcbd9'
@@ -154,8 +154,8 @@ export default {
       const margin = px(this.margin)
 
       const transform = this.toggled
-        ? translate3d(this.distance, margin)
-        : translate3d(margin, margin)
+        ? translate(this.distance, margin)
+        : translate(margin, margin)
 
       const background = this.switchColor
         ? this.switchColorCurrent
