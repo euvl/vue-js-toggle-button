@@ -22,6 +22,6 @@ export const px = value => {
   return `${value}px`
 }
 
-export const translate3d = (x, y, z = '0px') => {
-  return `translate3d(${x}, ${y}, ${z})`
+export const translate = (x, y) => {
+  return `translate(${x}, ${y})`
 }
