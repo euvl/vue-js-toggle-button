@@ -86,7 +86,7 @@ export default {
     switchColor: {
       type: [String, Object],
       validator (value) {
-        return isString(value) 
+        return isString(value)
           || has(value, 'checked')
           || has(value, 'unchecked')
       }
@@ -123,7 +123,7 @@ export default {
   computed: {
     className () {
       let { toggled, disabled } = this
-      
+
       return ['vue-js-switch', {
         toggled,
         disabled
@@ -272,10 +272,9 @@ export default {
   cursor: pointer;
 
   .v-switch-input {
-    opacity: 0;
     position: absolute;
-    width: 1px;
-    height: 1px;
+    width: 100%;
+    height: 100%;
   }
 
   .v-switch-label {
