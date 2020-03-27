@@ -18,39 +18,43 @@
     />
   </div>
   <template v-if="labels">
-    <span
-      class="v-switch-label v-left"
-      :style="labelStyle"
+    <toggle-button-label
       v-if="toggled"
-    >
-      <slot name="checked">
-        <template>{{labelChecked}}</template>
-      </slot>
-    </span>
-    <span
-      class="v-switch-label v-right"
-      :style="labelStyle"
+      :labels="labels"
+      :disabled="disabled"
+      :height="height"
+      :font-size="fontSize"
+      :color="colorLabel"
+      toggled
+      checked
+    />
+    <toggle-button-label
       v-else
-    >
-      <slot name="unchecked">
-        <template>{{labelUnchecked}}</template>
-      </slot>
-    </span>
+      :labels="labels"
+      :disabled="disabled"
+      :height="height"
+      :font-size="fontSize"
+      :color="colorLabel"
+      :checked="false"
+      :toggled="false"
+    />
   </template>
 </label>
 </template>
 
 <script>
-import { isString, isObject, isBoolean, has, get, translate, px } from './utils'
+import { isString, isObject, has, get, translate, px } from './utils'
+import generalMixin from './general-mixin'
+import ToggleButtonLabel from './ButtonLabel.vue'
 
-const DEFAULT_COLOR_CHECKED = '#75c791'
-const DEFAULT_COLOR_UNCHECKED = '#bfcbd9'
-const DEFAULT_LABEL_CHECKED = 'on'
-const DEFAULT_LABEL_UNCHECKED = 'off'
 const DEFAULT_SWITCH_COLOR = '#fff'
 
 export default {
   name: 'ToggleButton',
+  mixins: [generalMixin],
+  components: {
+    ToggleButtonLabel
+  },
   props: {
     value: {
       type: Boolean,
@@ -58,10 +62,6 @@ export default {
     },
     name: {
       type: String
-    },
-    disabled: {
-      type: Boolean,
-      default: false
     },
     tag: {
       type: String,
@@ -74,7 +74,15 @@ export default {
       type: Number,
       default: 300
     },
-    color: {
+    switchColor: {
+      type: [String, Object],
+      validator (value) {
+        return isString(value)
+          || has(value, 'checked')
+          || has(value, 'unchecked')
+      }
+    },
+    colorLabel: {
       type: [String, Object],
       validator (value) {
         return isString(value)
@@ -83,30 +91,9 @@ export default {
           || has(value, 'disabled')
       }
     },
-    switchColor: {
-      type: [String, Object],
-      validator (value) {
-        return isString(value) 
-          || has(value, 'checked')
-          || has(value, 'unchecked')
-      }
-    },
     cssColors: {
       type: Boolean,
       default: false
-    },
-    labels: {
-      type: [Boolean, Object],
-      default: false,
-      validator (value) {
-        return typeof value === 'object'
-          ? (value.checked || value.unchecked)
-          : typeof value === 'boolean'
-      }
-    },
-    height: {
-      type: Number,
-      default: 22
     },
     width: {
       type: Number,
@@ -115,15 +102,12 @@ export default {
     margin: {
       type: Number,
       default: 3
-    },
-    fontSize: {
-      type: Number
     }
   },
   computed: {
     className () {
       let { toggled, disabled } = this
-      
+
       return ['vue-js-switch', {
         toggled,
         disabled
@@ -142,7 +126,7 @@ export default {
     },
 
     buttonRadius () {
-      return this.height - this.margin * 2;
+      return this.height - this.margin * 2
     },
 
     distance () {
@@ -168,45 +152,6 @@ export default {
         transform,
         background
       }
-    },
-
-    labelStyle () {
-      return {
-        lineHeight: px(this.height),
-        fontSize: this.fontSize ? px(this.fontSize) : null
-      }
-    },
-
-    colorChecked () {
-      let { color } = this
-
-      if (!isObject(color)) {
-        return color || DEFAULT_COLOR_CHECKED
-      }
-
-      return get(color, 'checked', DEFAULT_COLOR_CHECKED)
-    },
-
-    colorUnchecked () {
-      return get(this.color, 'unchecked', DEFAULT_COLOR_UNCHECKED)
-    },
-
-    colorDisabled () {
-      return get(this.color, 'disabled', this.colorCurrent)
-    },
-
-    colorCurrent () {
-      return this.toggled
-        ? this.colorChecked
-        : this.colorUnchecked
-    },
-
-    labelChecked () {
-      return get(this.labels, 'checked', DEFAULT_LABEL_CHECKED)
-    },
-
-    labelUnchecked () {
-      return get(this.labels, 'unchecked', DEFAULT_LABEL_UNCHECKED)
     },
 
     switchColorChecked () {
@@ -239,30 +184,31 @@ export default {
   },
   data () {
     return {
-      toggled: !!this.value
+      toggled: !!this.value,
+      defaultColorChecked: '#75c791',
+      defaultColorUnchecked: '#bfcbd9'
     }
   },
   methods: {
     toggle(event) {
-      const toggled = !this.toggled;
+      const toggled = !this.toggled
 
       if (!this.sync) {
-        this.toggled = toggled;
+        this.toggled = toggled
       }
 
-      this.$emit('input', toggled);
+      this.$emit('input', toggled)
       this.$emit('change', {
         value: toggled,
         tag: this.tag,
-        srcEvent: event,
-      });
-    },
+        srcEvent: event
+      })
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-
 .vue-js-switch {
   display: inline-block;
   position: relative;
@@ -276,22 +222,6 @@ export default {
     position: absolute;
     width: 1px;
     height: 1px;
-  }
-
-  .v-switch-label {
-    position: absolute;
-    top: 0;
-    font-weight: 600;
-    color: white;
-    z-index: 1;
-
-    &.v-left {
-      left: 10px;
-    }
-
-    &.v-right {
-      right: 10px;
-    }
   }
 
   .v-switch-core {
