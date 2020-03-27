@@ -2,7 +2,7 @@
   <img src="https://badge.fury.io/js/vue-js-toggle-button.svg">
 </span> <span>
   <img src="https://img.shields.io/npm/dm/vue-js-toggle-button.svg">
-</span> 
+</span>
 
 # Vue.js toggle/switch button.
 
@@ -71,6 +71,7 @@ Vue.component('ToggleButton', ToggleButton)
 | speed           | Number            | 300        | Transition time for the animation   |
 | disabled        | Boolean           | false      | Button does not react on mouse events |
 | color           | [String, Object]  | `#75C791`  | If `String` - color of the button when checked <br>If `Object` - colors for the button when checked/unchecked or disabled<br>Example: `{checked: '#00FF00', unchecked: '#FF0000', disabled: '#CCCCCC'}`  |
+| colorLabel      | [String, Object]  | `#75C791`  | If `String` - color of the label when checked <br>If `Object` - colors for the label when checked/unchecked or disabled<br>Example: `{checked: '#00FF00', unchecked: '#FF0000', disabled: '#CCCCCC'}`  |
 | css-colors       | Boolean           | false      | If `true` - deactivates the setting of colors through inline styles in favor of using CSS styling |
 | labels          | [Boolean, Object] | false      | If `Boolean` - shows/hides default labels ("on" and "off") <br>If `Object` - sets custom labels for both states. <br>Example: `{checked: 'Foo', unchecked: 'Bar'}`   |
 | switch-color     | [String, Object]  | `#BFCBD9`  | If `String` - color or background property of the switch when checked <br>If `Object` - colors or background property for the switch when checked/uncheked <br>Example: `{checked: '#25EF02', unchecked: 'linear-gradient(red, yellow)'}`   |
