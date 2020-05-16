@@ -279,6 +279,10 @@ export default {
     height: 1px;
   }
 
+  .v-switch-input:focus + .v-switch-core {
+    box-shadow: 0 0 2px 1px #888;
+  }
+
   .v-switch-label {
     position: absolute;
     top: 0;
