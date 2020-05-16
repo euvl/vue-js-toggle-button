@@ -1,44 +1,35 @@
 <template>
-<label :class="className" tabindex="0" @keydown.space.prevent="keyToggle">
-  <input
-    type="checkbox"
-    class="v-switch-input"
-    :name="name"
-    :checked="value"
-    :disabled="disabled"
-    tabindex="-1"
-    @change.stop="toggle"
+  <label
+    :class="className"
+    tabindex="0"
+    role="checkbox"
+    @keydown.space.prevent="keyToggle"
   >
-  <div
-    class="v-switch-core"
-    :style="coreStyle"
-  >
-    <div
-      class="v-switch-button"
-      :style="buttonStyle"
+    <input
+      type="checkbox"
+      class="v-switch-input"
+      :name="name"
+      :checked="value"
+      :disabled="disabled"
+      tabindex="-1"
+      @change.stop="toggle"
     />
-  </div>
-  <template v-if="labels">
-    <span
-      class="v-switch-label v-left"
-      :style="labelStyle"
-      v-if="toggled"
-    >
-      <slot name="checked">
-        <template>{{labelChecked}}</template>
-      </slot>
-    </span>
-    <span
-      class="v-switch-label v-right"
-      :style="labelStyle"
-      v-else
-    >
-      <slot name="unchecked">
-        <template>{{labelUnchecked}}</template>
-      </slot>
-    </span>
-  </template>
-</label>
+    <div class="v-switch-core" :style="coreStyle">
+      <div class="v-switch-button" :style="buttonStyle" />
+    </div>
+    <template v-if="labels">
+      <span class="v-switch-label v-left" :style="labelStyle" v-if="toggled">
+        <slot name="checked">
+          <template>{{ labelChecked }}</template>
+        </slot>
+      </span>
+      <span class="v-switch-label v-right" :style="labelStyle" v-else>
+        <slot name="unchecked">
+          <template>{{ labelUnchecked }}</template>
+        </slot>
+      </span>
+    </template>
+  </label>
 </template>
 
 <script>
@@ -65,7 +56,7 @@ export default {
       default: false
     },
     tag: {
-      type: String,
+      type: String
     },
     sync: {
       type: Boolean,
@@ -77,19 +68,21 @@ export default {
     },
     color: {
       type: [String, Object],
-      validator (value) {
-        return isString(value)
-          || has(value, 'checked')
-          || has(value, 'unchecked')
-          || has(value, 'disabled')
+      validator(value) {
+        return (
+          isString(value) ||
+          has(value, 'checked') ||
+          has(value, 'unchecked') ||
+          has(value, 'disabled')
+        )
       }
     },
     switchColor: {
       type: [String, Object],
-      validator (value) {
-        return isString(value) 
-          || has(value, 'checked')
-          || has(value, 'unchecked')
+      validator(value) {
+        return (
+          isString(value) || has(value, 'checked') || has(value, 'unchecked')
+        )
       }
     },
     cssColors: {
@@ -99,9 +92,9 @@ export default {
     labels: {
       type: [Boolean, Object],
       default: false,
-      validator (value) {
+      validator(value) {
         return typeof value === 'object'
-          ? (value.checked || value.unchecked)
+          ? value.checked || value.unchecked
           : typeof value === 'boolean'
       }
     },
@@ -122,35 +115,40 @@ export default {
     }
   },
   computed: {
-    className () {
+    className() {
       let { toggled, disabled } = this
-      
-      return ['vue-js-switch', {
-        toggled,
-        disabled
-      }]
+
+      return [
+        'vue-js-switch',
+        {
+          toggled,
+          disabled
+        }
+      ]
     },
 
-    coreStyle () {
+    coreStyle() {
       return {
         width: px(this.width),
         height: px(this.height),
         backgroundColor: this.cssColors
           ? null
-          : (this.disabled ? this.colorDisabled : this.colorCurrent),
+          : this.disabled
+          ? this.colorDisabled
+          : this.colorCurrent,
         borderRadius: px(Math.round(this.height / 2))
       }
     },
 
-    buttonRadius () {
-      return this.height - this.margin * 2;
+    buttonRadius() {
+      return this.height - this.margin * 2
     },
 
-    distance () {
+    distance() {
       return px(this.width - this.height + this.margin)
     },
 
-    buttonStyle () {
+    buttonStyle() {
       const transition = `transform ${this.speed}ms`
       const margin = px(this.margin)
 
@@ -158,9 +156,7 @@ export default {
         ? translate(this.distance, margin)
         : translate(margin, margin)
 
-      const background = this.switchColor
-        ? this.switchColorCurrent
-        : null
+      const background = this.switchColor ? this.switchColorCurrent : null
 
       return {
         width: px(this.buttonRadius),
@@ -171,14 +167,14 @@ export default {
       }
     },
 
-    labelStyle () {
+    labelStyle() {
       return {
         lineHeight: px(this.height),
         fontSize: this.fontSize ? px(this.fontSize) : null
       }
     },
 
-    colorChecked () {
+    colorChecked() {
       let { color } = this
 
       if (!isObject(color)) {
@@ -188,57 +184,52 @@ export default {
       return get(color, 'checked', DEFAULT_COLOR_CHECKED)
     },
 
-    colorUnchecked () {
+    colorUnchecked() {
       return get(this.color, 'unchecked', DEFAULT_COLOR_UNCHECKED)
     },
 
-    colorDisabled () {
+    colorDisabled() {
       return get(this.color, 'disabled', this.colorCurrent)
     },
 
-    colorCurrent () {
-      return this.toggled
-        ? this.colorChecked
-        : this.colorUnchecked
+    colorCurrent() {
+      return this.toggled ? this.colorChecked : this.colorUnchecked
     },
 
-    labelChecked () {
+    labelChecked() {
       return get(this.labels, 'checked', DEFAULT_LABEL_CHECKED)
     },
 
-    labelUnchecked () {
+    labelUnchecked() {
       return get(this.labels, 'unchecked', DEFAULT_LABEL_UNCHECKED)
     },
 
-    switchColorChecked () {
+    switchColorChecked() {
       return get(this.switchColor, 'checked', DEFAULT_SWITCH_COLOR)
     },
 
-    switchColorUnchecked () {
+    switchColorUnchecked() {
       return get(this.switchColor, 'unchecked', DEFAULT_SWITCH_COLOR)
     },
 
-    switchColorCurrent () {
+    switchColorCurrent() {
       let { switchColor } = this
 
       if (!isObject(this.switchColor)) {
         return this.switchColor || DEFAULT_SWITCH_COLOR
       }
 
-      return this.toggled
-        ? this.switchColorChecked
-        : this.switchColorUnchecked
+      return this.toggled ? this.switchColorChecked : this.switchColorUnchecked
     }
-
   },
   watch: {
-    value (value) {
+    value(value) {
       if (this.sync) {
         this.toggled = !!value
       }
     }
   },
-  data () {
+  data() {
     return {
       toggled: !!this.value
     }
@@ -247,31 +238,32 @@ export default {
     keyToggle(event) {
       // the key event happens whether the control is disabled or not
       // nothing should be done if disabled is true
-      if(this.disabled) {
-        return;
+      if (this.disabled) {
+        return
       }
-      this.toggle(event);
+
+      this.toggle(event)
     },
+
     toggle(event) {
-      const toggled = !this.toggled;
+      const toggled = !this.toggled
 
       if (!this.sync) {
-        this.toggled = toggled;
+        this.toggled = toggled
       }
 
-      this.$emit('input', toggled);
+      this.$emit('input', toggled)
       this.$emit('change', {
         value: toggled,
         tag: this.tag,
-        srcEvent: event,
-      });
-    },
+        srcEvent: event
+      })
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-
 .vue-js-switch {
   display: inline-block;
   position: relative;
@@ -311,7 +303,7 @@ export default {
     outline: 0;
     margin: 0;
 
-    transition: border-color .3s, background-color .3s;
+    transition: border-color 0.3s, background-color 0.3s;
     user-select: none;
 
     .v-switch-button {
